@@ -1,4 +1,4 @@
-# kilo-rs ⚡
+# kilo-rs
 
 ### Autonomous Clean-Room Port of Antirez's Kilo Editor in Idiomatic Rust
 
