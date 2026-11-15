@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="435" viewBox="0 0 2200 435">
+<rect width="100%" height="100%" fill="#fffaf5"/>
+<style>text{font-family:Menlo,monospace;fill:#292524}.frame{stroke:#fffaf5;stroke-width:0.6}</style>
+<text x="30" y="44" font-size="29" font-weight="bold">C implementation — sampled-stack flame graph</text>
+<text x="30" y="76" font-size="16">macOS sample • 8 s • 1 ms interval • 6,203 stack samples</text>
+<text x="30" y="102" font-size="16">Width = share of sampled stacks, including terminal I/O waits. Each graph is normalized independently.</text>
+<text x="30" y="411" font-size="14">Bottom → top: caller → callee. Blue/gray = syscall or synchronization frame; warm colors = other functions.</text>
+<g><title>all samples — 6,203 samples (100.0%)</title><rect class="frame" x="30.000" y="370" width="2140.000" height="24" fill="rgb(243,178,66)"/>
+<text x="34.000" y="387" font-size="12">all samples — 6,203 samples (100.0%)</text>
+</g>
+<g><title>main — 6,202 samples (100.0%)</title><rect class="frame" x="30.000" y="345" width="2139.655" height="24" fill="rgb(238,120,129)"/>
+<text x="34.000" y="362" font-size="12">main — 6,202 samples (100.0%)</text>
+</g>
+<g><title>editorRefreshScreen — 5,669 samples (91.4%)</title><rect class="frame" x="30.000" y="320" width="1955.773" height="24" fill="rgb(235,136,121)"/>
+<text x="34.000" y="337" font-size="12">editorRefreshScreen — 5,669 samples (91.4%)</text>
+</g>
+<g><title>write — 2,653 samples (42.8%)</title><rect class="frame" x="30.000" y="295" width="915.270" height="24" fill="#93b6c7"/>
+<text x="34.000" y="312" font-size="12">write — 2,653 samples (42.8%)</text>
+</g>
+<g><title>_realloc — 2,400 samples (38.7%)</title><rect class="frame" x="945.270" y="295" width="827.986" height="24" fill="rgb(235,181,112)"/>
+<text x="949.270" y="312" font-size="12">_realloc — 2,400 samples (38.7%)</text>
+</g>
+<g><title>_malloc_zone_realloc — 1,372 samples (22.1%)</title><rect class="frame" x="945.270" y="270" width="473.332" height="24" fill="rgb(229,158,110)"/>
+<text x="949.270" y="287" font-size="12">_malloc_zone_realloc — 1,372 samples (22.1%)</text>
+</g>
+<g><title>szone_realloc — 894 samples (14.4%)</title><rect class="frame" x="945.270" y="245" width="308.425" height="24" fill="rgb(232,165,99)"/>
+<text x="949.270" y="262" font-size="12">szone_realloc — 894 samples (14.4%)</text>
+</g>
+<g><title>szone_size — 411 samples (6.6%)</title><rect class="frame" x="945.270" y="220" width="141.793" height="24" fill="rgb(225,122,67)"/>
+<text x="949.270" y="237" font-size="12">szone_size…</text>
+</g>
+<g><title>tiny_size — 290 samples (4.7%)</title><rect class="frame" x="945.270" y="195" width="100.048" height="24" fill="rgb(246,116,75)"/>
+<text x="949.270" y="212" font-size="12">tiny_size…</text>
+</g>
+<g><title>small_size — 44 samples (0.7%)</title><rect class="frame" x="1045.318" y="195" width="15.180" height="24" fill="rgb(246,135,72)"/>
+</g>
+<g><title>tiny_try_realloc_in_place — 126 samples (2.0%)</title><rect class="frame" x="1087.063" y="220" width="43.469" height="24" fill="rgb(237,176,87)"/>
+<text x="1091.063" y="237" font-size="12">tin…</text>
+</g>
+<g><title>tiny_free_list_add_ptr — 18 samples (0.3%)</title><rect class="frame" x="1087.063" y="195" width="6.210" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>tiny_free_list_remove_ptr — 17 samples (0.3%)</title><rect class="frame" x="1093.273" y="195" width="5.865" height="24" fill="rgb(235,208,75)"/>
+</g>
+<g><title>_tiny_check_and_zero_inline_meta_from_freelist — 10 samples (0.2%)</title><rect class="frame" x="1099.138" y="195" width="3.450" height="24" fill="rgb(232,135,124)"/>
+</g>
+<g><title>szone_good_size — 68 samples (1.1%)</title><rect class="frame" x="1130.532" y="220" width="23.460" height="24" fill="rgb(240,165,120)"/>
+</g>
+<g><title>tiny_size — 28 samples (0.5%)</title><rect class="frame" x="1153.992" y="220" width="9.660" height="24" fill="rgb(246,116,75)"/>
+</g>
+<g><title>free_tiny — 16 samples (0.3%)</title><rect class="frame" x="1163.651" y="220" width="5.520" height="24" fill="rgb(240,170,107)"/>
+</g>
+<g><title>_platform_memset — 6 samples (0.1%)</title><rect class="frame" x="1163.651" y="195" width="2.070" height="24" fill="rgb(228,126,105)"/>
+</g>
+<g><title>tiny_free_no_lock — 6 samples (0.1%)</title><rect class="frame" x="1165.721" y="195" width="2.070" height="24" fill="rgb(245,147,80)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 2 samples (0.0%)</title><rect class="frame" x="1165.721" y="170" width="0.690" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>small_try_realloc_in_place — 7 samples (0.1%)</title><rect class="frame" x="1169.171" y="220" width="2.415" height="24" fill="rgb(245,115,111)"/>
+</g>
+<g><title>small_free_list_remove_ptr_no_clear — 2 samples (0.0%)</title><rect class="frame" x="1169.171" y="195" width="0.690" height="24" fill="rgb(249,165,70)"/>
+</g>
+<g><title>small_free_list_find_by_ptr — 1 samples (0.0%)</title><rect class="frame" x="1169.861" y="195" width="0.345" height="24" fill="rgb(236,136,66)"/>
+</g>
+<g><title>szone_malloc_should_clear — 6 samples (0.1%)</title><rect class="frame" x="1171.586" y="220" width="2.070" height="24" fill="rgb(240,147,120)"/>
+</g>
+<g><title>small_malloc_should_clear — 4 samples (0.1%)</title><rect class="frame" x="1171.586" y="195" width="1.380" height="24" fill="rgb(230,144,112)"/>
+</g>
+<g><title>small_malloc_from_free_list — 4 samples (0.1%)</title><rect class="frame" x="1171.586" y="170" width="1.380" height="24" fill="rgb(241,141,82)"/>
+</g>
+<g><title>small_free_list_remove_ptr_no_clear — 2 samples (0.0%)</title><rect class="frame" x="1171.586" y="145" width="0.690" height="24" fill="rgb(249,165,70)"/>
+</g>
+<g><title>tiny_malloc_should_clear — 1 samples (0.0%)</title><rect class="frame" x="1172.966" y="195" width="0.345" height="24" fill="rgb(229,121,120)"/>
+</g>
+<g><title>tiny_malloc_from_free_list — 1 samples (0.0%)</title><rect class="frame" x="1172.966" y="170" width="0.345" height="24" fill="rgb(242,144,81)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 1 samples (0.0%)</title><rect class="frame" x="1172.966" y="145" width="0.345" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 3 samples (0.0%)</title><rect class="frame" x="1173.656" y="220" width="1.035" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>tiny_free_list_remove_ptr — 2 samples (0.0%)</title><rect class="frame" x="1174.691" y="220" width="0.690" height="24" fill="rgb(235,208,75)"/>
+</g>
+<g><title>_szone_free — 1 samples (0.0%)</title><rect class="frame" x="1175.381" y="220" width="0.345" height="24" fill="rgb(241,190,81)"/>
+</g>
+<g><title>_tiny_check_and_zero_inline_meta_from_freelist — 1 samples (0.0%)</title><rect class="frame" x="1175.726" y="220" width="0.345" height="24" fill="rgb(232,135,124)"/>
+</g>
+<g><title>tiny_free_no_lock — 1 samples (0.0%)</title><rect class="frame" x="1176.071" y="220" width="0.345" height="24" fill="rgb(245,147,80)"/>
+</g>
+<g><title>default_zone_realloc — 100 samples (1.6%)</title><rect class="frame" x="1253.695" y="245" width="34.499" height="24" fill="rgb(236,177,102)"/>
+<text x="1257.695" y="262" font-size="12">de…</text>
+</g>
+<g><title>szone_size — 55 samples (0.9%)</title><rect class="frame" x="1288.194" y="245" width="18.975" height="24" fill="rgb(225,122,67)"/>
+</g>
+<g><title>tiny_try_realloc_in_place — 1 samples (0.0%)</title><rect class="frame" x="1307.169" y="245" width="0.345" height="24" fill="rgb(237,176,87)"/>
+</g>
+<g><title>szone_size — 539 samples (8.7%)</title><rect class="frame" x="1418.602" y="270" width="185.952" height="24" fill="rgb(225,122,67)"/>
+<text x="1422.602" y="287" font-size="12">szone_size…</text>
+</g>
+<g><title>tiny_size — 307 samples (4.9%)</title><rect class="frame" x="1418.602" y="245" width="105.913" height="24" fill="rgb(246,116,75)"/>
+<text x="1422.602" y="262" font-size="12">tiny_size…</text>
+</g>
+<g><title>small_size — 65 samples (1.0%)</title><rect class="frame" x="1524.516" y="245" width="22.425" height="24" fill="rgb(246,135,72)"/>
+</g>
+<g><title>szone_realloc — 89 samples (1.4%)</title><rect class="frame" x="1604.554" y="270" width="30.704" height="24" fill="rgb(232,165,99)"/>
+<text x="1608.554" y="287" font-size="12">sz…</text>
+</g>
+<g><title>tiny_size — 40 samples (0.6%)</title><rect class="frame" x="1635.259" y="270" width="13.800" height="24" fill="rgb(246,116,75)"/>
+</g>
+<g><title>snprintf — 240 samples (3.9%)</title><rect class="frame" x="1773.256" y="295" width="82.799" height="24" fill="rgb(241,189,83)"/>
+<text x="1777.256" y="312" font-size="12">snprintf…</text>
+</g>
+<g><title>_vsnprintf — 234 samples (3.8%)</title><rect class="frame" x="1773.256" y="270" width="80.729" height="24" fill="rgb(248,192,113)"/>
+<text x="1777.256" y="287" font-size="12">_vsnprin…</text>
+</g>
+<g><title>__vfprintf — 205 samples (3.3%)</title><rect class="frame" x="1773.256" y="245" width="70.724" height="24" fill="rgb(248,163,107)"/>
+<text x="1777.256" y="262" font-size="12">__vfpri…</text>
+</g>
+<g><title>__sfvwrite — 81 samples (1.3%)</title><rect class="frame" x="1773.256" y="220" width="27.945" height="24" fill="rgb(239,178,116)"/>
+</g>
+<g><title>_platform_memmove — 31 samples (0.5%)</title><rect class="frame" x="1773.256" y="195" width="10.695" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>__sfvwrite — 28 samples (0.5%)</title><rect class="frame" x="1783.951" y="195" width="9.660" height="24" fill="rgb(239,178,116)"/>
+</g>
+<g><title>DYLD-STUB$$mkdtempat_np — 6 samples (0.1%)</title><rect class="frame" x="1793.611" y="195" width="2.070" height="24" fill="rgb(239,197,74)"/>
+</g>
+<g><title>__vfprintf — 19 samples (0.3%)</title><rect class="frame" x="1801.201" y="220" width="6.555" height="24" fill="rgb(248,163,107)"/>
+</g>
+<g><title>__sfvwrite — 19 samples (0.3%)</title><rect class="frame" x="1801.201" y="195" width="6.555" height="24" fill="rgb(239,178,116)"/>
+</g>
+<g><title>__ultoa — 13 samples (0.2%)</title><rect class="frame" x="1807.756" y="220" width="4.485" height="24" fill="rgb(247,166,80)"/>
+</g>
+<g><title>localeconv_l — 9 samples (0.1%)</title><rect class="frame" x="1812.241" y="220" width="3.105" height="24" fill="rgb(231,162,69)"/>
+</g>
+<g><title>os_unfair_lock_unlock — 2 samples (0.0%)</title><rect class="frame" x="1812.241" y="195" width="0.690" height="24" fill="rgb(230,158,91)"/>
+</g>
+<g><title>DYLD-STUB$$os_unfair_lock_lock — 1 samples (0.0%)</title><rect class="frame" x="1812.931" y="195" width="0.345" height="24" fill="rgb(234,170,83)"/>
+</g>
+<g><title>DYLD-STUB$$os_unfair_lock_unlock — 1 samples (0.0%)</title><rect class="frame" x="1813.276" y="195" width="0.345" height="24" fill="rgb(247,150,73)"/>
+</g>
+<g><title>os_unfair_lock_lock — 1 samples (0.0%)</title><rect class="frame" x="1813.621" y="195" width="0.345" height="24" fill="rgb(236,148,92)"/>
+</g>
+<g><title>_free — 5 samples (0.1%)</title><rect class="frame" x="1815.346" y="220" width="1.725" height="24" fill="rgb(245,196,122)"/>
+</g>
+<g><title>__v2printf — 13 samples (0.2%)</title><rect class="frame" x="1843.980" y="245" width="4.485" height="24" fill="rgb(234,123,116)"/>
+</g>
+<g><title>localeconv_l — 2 samples (0.0%)</title><rect class="frame" x="1848.465" y="245" width="0.690" height="24" fill="rgb(231,162,69)"/>
+</g>
+<g><title>__ultoa — 1 samples (0.0%)</title><rect class="frame" x="1849.155" y="245" width="0.345" height="24" fill="rgb(247,166,80)"/>
+</g>
+<g><title>__v2printf — 2 samples (0.0%)</title><rect class="frame" x="1853.985" y="270" width="0.690" height="24" fill="rgb(234,123,116)"/>
+</g>
+<g><title>vsnprintf_l — 2 samples (0.0%)</title><rect class="frame" x="1854.675" y="270" width="0.690" height="24" fill="rgb(233,207,77)"/>
+</g>
+<g><title>__vfprintf — 1 samples (0.0%)</title><rect class="frame" x="1855.365" y="270" width="0.345" height="24" fill="rgb(248,163,107)"/>
+</g>
+<g><title>DYLD-STUB$$realloc — 56 samples (0.9%)</title><rect class="frame" x="1856.055" y="295" width="19.320" height="24" fill="rgb(248,162,91)"/>
+</g>
+<g><title>szone_size — 40 samples (0.6%)</title><rect class="frame" x="1875.375" y="295" width="13.800" height="24" fill="rgb(225,122,67)"/>
+</g>
+<g><title>_malloc_zone_realloc — 22 samples (0.4%)</title><rect class="frame" x="1889.175" y="295" width="7.590" height="24" fill="rgb(229,158,110)"/>
+</g>
+<g><title>_platform_memmove — 10 samples (0.2%)</title><rect class="frame" x="1896.764" y="295" width="3.450" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>time — 9 samples (0.1%)</title><rect class="frame" x="1900.214" y="295" width="3.105" height="24" fill="rgb(226,206,116)"/>
+</g>
+<g><title>fegetenv — 6 samples (0.1%)</title><rect class="frame" x="1900.214" y="270" width="2.070" height="24" fill="rgb(248,158,70)"/>
+</g>
+<g><title>fesetenv — 2 samples (0.0%)</title><rect class="frame" x="1902.284" y="270" width="0.690" height="24" fill="rgb(239,131,99)"/>
+</g>
+<g><title>gettimeofday — 1 samples (0.0%)</title><rect class="frame" x="1902.974" y="270" width="0.345" height="24" fill="rgb(230,129,109)"/>
+</g>
+<g><title>__commpage_gettimeofday_internal — 1 samples (0.0%)</title><rect class="frame" x="1902.974" y="245" width="0.345" height="24" fill="rgb(225,207,117)"/>
+</g>
+<g><title>mach_absolute_time — 1 samples (0.0%)</title><rect class="frame" x="1902.974" y="220" width="0.345" height="24" fill="rgb(239,120,109)"/>
+</g>
+<g><title>szone_malloc_should_clear — 7 samples (0.1%)</title><rect class="frame" x="1903.319" y="295" width="2.415" height="24" fill="rgb(240,147,120)"/>
+</g>
+<g><title>tiny_malloc_should_clear — 5 samples (0.1%)</title><rect class="frame" x="1903.319" y="270" width="1.725" height="24" fill="rgb(229,121,120)"/>
+</g>
+<g><title>tiny_malloc_from_free_list — 3 samples (0.0%)</title><rect class="frame" x="1903.319" y="245" width="1.035" height="24" fill="rgb(242,144,81)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 1 samples (0.0%)</title><rect class="frame" x="1903.319" y="220" width="0.345" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>_tiny_check_and_zero_inline_meta_from_freelist — 1 samples (0.0%)</title><rect class="frame" x="1904.354" y="245" width="0.345" height="24" fill="rgb(232,135,124)"/>
+</g>
+<g><title>DYLD-STUB$$memcpy — 2 samples (0.0%)</title><rect class="frame" x="1905.734" y="295" width="0.690" height="24" fill="rgb(231,156,95)"/>
+</g>
+<g><title>DYLD-STUB$$snprintf — 2 samples (0.0%)</title><rect class="frame" x="1906.424" y="295" width="0.690" height="24" fill="rgb(235,138,77)"/>
+</g>
+<g><title>_malloc_zone_malloc — 2 samples (0.0%)</title><rect class="frame" x="1907.114" y="295" width="0.690" height="24" fill="rgb(225,133,85)"/>
+</g>
+<g><title>_platform_strlen — 1 samples (0.0%)</title><rect class="frame" x="1907.804" y="295" width="0.345" height="24" fill="rgb(237,171,129)"/>
+</g>
+<g><title>malloc — 1 samples (0.0%)</title><rect class="frame" x="1908.149" y="295" width="0.345" height="24" fill="rgb(227,207,111)"/>
+</g>
+<g><title>realloc — 1 samples (0.0%)</title><rect class="frame" x="1908.494" y="295" width="0.345" height="24" fill="rgb(237,135,70)"/>
+</g>
+<g><title>editorProcessKeypress — 472 samples (7.6%)</title><rect class="frame" x="1985.773" y="320" width="162.837" height="24" fill="rgb(227,205,129)"/>
+<text x="1989.773" y="337" font-size="12">editorProcessKeypres…</text>
+</g>
+<g><title>editorReadKey — 470 samples (7.6%)</title><rect class="frame" x="1985.773" y="295" width="162.147" height="24" fill="rgb(233,205,68)"/>
+<text x="1989.773" y="312" font-size="12">editorReadKey…</text>
+</g>
+<g><title>read — 469 samples (7.6%)</title><rect class="frame" x="1985.773" y="270" width="161.802" height="24" fill="#93b6c7"/>
+<text x="1989.773" y="287" font-size="12">read…</text>
+</g>
+<g><title>editorMoveCursor — 2 samples (0.0%)</title><rect class="frame" x="2147.920" y="295" width="0.690" height="24" fill="rgb(229,133,115)"/>
+</g>
+<g><title>_realloc — 40 samples (0.6%)</title><rect class="frame" x="2148.610" y="320" width="13.800" height="24" fill="rgb(235,181,112)"/>
+</g>
+<g><title>free_small — 5 samples (0.1%)</title><rect class="frame" x="2162.410" y="320" width="1.725" height="24" fill="rgb(233,182,67)"/>
+</g>
+<g><title>_free — 4 samples (0.1%)</title><rect class="frame" x="2164.135" y="320" width="1.380" height="24" fill="rgb(245,196,122)"/>
+</g>
+<g><title>DYLD-STUB$$free — 2 samples (0.0%)</title><rect class="frame" x="2165.515" y="320" width="0.690" height="24" fill="rgb(234,139,119)"/>
+</g>
+<g><title>szone_try_free_default — 2 samples (0.0%)</title><rect class="frame" x="2166.205" y="320" width="0.690" height="24" fill="rgb(249,184,118)"/>
+</g>
+<g><title>free — 1 samples (0.0%)</title><rect class="frame" x="2166.895" y="320" width="0.345" height="24" fill="rgb(248,159,83)"/>
+</g>
+<g><title>small_free_list_add_ptr — 1 samples (0.0%)</title><rect class="frame" x="2167.240" y="320" width="0.345" height="24" fill="rgb(244,123,80)"/>
+</g>
+<g><title>snprintf — 1 samples (0.0%)</title><rect class="frame" x="2167.585" y="320" width="0.345" height="24" fill="rgb(241,189,83)"/>
+</g>
+<g><title>[main thread] — 1 samples (0.0%)</title><rect class="frame" x="2169.655" y="345" width="0.345" height="24" fill="rgb(231,136,86)"/>
+</g>
+<g><title>start — 1 samples (0.0%)</title><rect class="frame" x="2169.655" y="320" width="0.345" height="24" fill="rgb(229,147,105)"/>
+</g>
+<g><title>_szone_free — 1 samples (0.0%)</title><rect class="frame" x="2169.655" y="295" width="0.345" height="24" fill="rgb(241,190,81)"/>
+</g>
+</svg>

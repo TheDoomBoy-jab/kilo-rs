@@ -1,0 +1,190 @@
+{
+  "metric": "PTY input-to-complete-frame wall time (startup excluded)",
+  "warning": "Not isolated renderer CPU time; control system load and rebuild both binaries comparably before publishing results.",
+  "terminal": {
+    "rows": 24,
+    "cols": 80
+  },
+  "measured_down_keys_per_trial": 200,
+  "warmup_down_keys_per_trial": 10,
+  "target": "/Users/aahannayak/kilo/kilo.c",
+  "target_sha256": "4a44dd0e41670a9e49ecccb338ee199334f0dd472fc7f86467569cf99c391abe",
+  "run_order": [
+    "C",
+    "Rust",
+    "C",
+    "Rust",
+    "Rust",
+    "C",
+    "C",
+    "Rust",
+    "C",
+    "Rust",
+    "C",
+    "Rust",
+    "C",
+    "Rust"
+  ],
+  "results": {
+    "C": {
+      "median_ms": 13.219708,
+      "min_ms": 11.929083,
+      "max_ms": 15.400916,
+      "stdev_ms": 1.162368876181842,
+      "binary_bytes": 69104,
+      "binary_sha256": "c11db59fc32c453de37bcc6f7c94cb34b240c182e27749843518391d04a3e112",
+      "runs": [
+        {
+          "milliseconds": 15.400916,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 282050,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 13.7345,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 282050,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 13.226208,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 282050,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 13.219708,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 282050,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 12.422208,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 282050,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 11.929083,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 282050,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 12.329167,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 282050,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        }
+      ]
+    },
+    "Rust": {
+      "median_ms": 6.4825,
+      "min_ms": 5.768458,
+      "max_ms": 8.433,
+      "stdev_ms": 0.8770796756772687,
+      "binary_bytes": 502944,
+      "binary_sha256": "461bcba990c2a55096d5cfa86812e57beb1d6354151045618103458e813964f5",
+      "runs": [
+        {
+          "milliseconds": 8.433,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 273411,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 6.35975,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 273411,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 6.112208,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 273411,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 7.188958,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 273411,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 6.4825,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 273411,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 6.745625,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 273411,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        },
+        {
+          "milliseconds": 5.768458,
+          "measured_frames": 200,
+          "total_acknowledged_frames": 212,
+          "measured_output_bytes": 273411,
+          "line_before": 54,
+          "line_after": 254,
+          "file_lines": 1308,
+          "exit_code": 0
+        }
+      ]
+    }
+  }
+}

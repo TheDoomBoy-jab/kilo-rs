@@ -17,12 +17,12 @@ impl Highlight {
     pub fn ansi_color(self) -> u8 {
         match self {
             Highlight::Comment | Highlight::MlComment => 36, // cyan
-            Highlight::Keyword1 => 33,                        // yellow
-            Highlight::Keyword2 => 32,                        // green
-            Highlight::String => 35,                          // magenta
-            Highlight::Number => 31,                          // red
-            Highlight::Match => 34,                           // blue
-            Highlight::Normal | Highlight::NonPrint => 37,    // white/default
+            Highlight::Keyword1 => 33,                       // yellow
+            Highlight::Keyword2 => 32,                       // green
+            Highlight::String => 35,                         // magenta
+            Highlight::Number => 31,                         // red
+            Highlight::Match => 34,                          // blue
+            Highlight::Normal | Highlight::NonPrint => 37,   // white/default
         }
     }
 }
@@ -41,12 +41,46 @@ pub const C_SYNTAX: SyntaxSpec = SyntaxSpec {
     extensions: &[".c", ".h", ".cpp", ".hpp", ".cc", ".rs"],
     keywords: &[
         // Primary keywords
-        "switch", "if", "while", "for", "break", "continue", "return", "else",
-        "struct", "union", "typedef", "static", "enum", "class", "fn", "let",
-        "mut", "pub", "impl", "match", "loop", "use", "mod", "crate",
+        "switch",
+        "if",
+        "while",
+        "for",
+        "break",
+        "continue",
+        "return",
+        "else",
+        "struct",
+        "union",
+        "typedef",
+        "static",
+        "enum",
+        "class",
+        "fn",
+        "let",
+        "mut",
+        "pub",
+        "impl",
+        "match",
+        "loop",
+        "use",
+        "mod",
+        "crate",
         // Secondary type keywords (marked with trailing '|')
-        "int|", "long|", "double|", "float|", "char|", "unsigned|", "signed|",
-        "void|", "usize|", "isize|", "u8|", "i32|", "u32|", "bool|", "String|",
+        "int|",
+        "long|",
+        "double|",
+        "float|",
+        "char|",
+        "unsigned|",
+        "signed|",
+        "void|",
+        "usize|",
+        "isize|",
+        "u8|",
+        "i32|",
+        "u32|",
+        "bool|",
+        "String|",
     ],
     singleline_comment_start: "//",
     multiline_comment_start: "/*",
@@ -65,13 +99,12 @@ pub fn select_syntax(filename: &str) -> Option<&'static SyntaxSpec> {
 }
 
 fn is_separator(b: u8) -> bool {
-    b.is_ascii_whitespace()
-        || b == b'\0'
-        || b",.()+-/*=~%<>[];".contains(&b)
+    b.is_ascii_whitespace() || b == b'\0' || b",.()+-/*=~%<>[];{}:!&|^?".contains(&b)
 }
 
 pub struct Row {
     pub chars: Vec<u8>,
+    pub ending: Vec<u8>,
     pub render: Vec<u8>,
     pub hl: Vec<Highlight>,
     pub hl_open_comment: bool,
@@ -81,6 +114,7 @@ impl Row {
     pub fn new(chars: Vec<u8>) -> Self {
         Self {
             chars,
+            ending: b"\n".to_vec(),
             render: Vec::new(),
             hl: Vec::new(),
             hl_open_comment: false,
@@ -91,10 +125,8 @@ impl Row {
         self.render.clear();
         for &b in &self.chars {
             if b == b'\t' {
-                self.render.push(b' ');
-                while self.render.len() % TAB_STOP != 0 {
-                    self.render.push(b' ');
-                }
+                let spaces = TAB_STOP - self.render.len() % TAB_STOP;
+                self.render.resize(self.render.len() + spaces, b' ');
             } else {
                 self.render.push(b);
             }
@@ -113,6 +145,21 @@ impl Row {
         rx
     }
 
+    pub fn rx_to_cx(&self, rx: usize) -> usize {
+        let mut rendered = 0;
+        for (cx, &b) in self.chars.iter().enumerate() {
+            rendered += if b == b'\t' {
+                TAB_STOP - rendered % TAB_STOP
+            } else {
+                1
+            };
+            if rendered > rx {
+                return cx;
+            }
+        }
+        self.chars.len()
+    }
+
     pub fn insert_char(&mut self, at: usize, c: u8) {
         let idx = at.min(self.chars.len());
         self.chars.insert(idx, c);
@@ -129,13 +176,15 @@ impl Row {
         self.hl.resize(self.render.len(), Highlight::Normal);
 
         for (i, &b) in self.render.iter().enumerate() {
-            if b < 32 || b >= 127 {
+            if !(32..127).contains(&b) {
                 self.hl[i] = Highlight::NonPrint;
             }
         }
 
         let Some(syn) = syntax else {
-            return false;
+            let changed = self.hl_open_comment;
+            self.hl_open_comment = false;
+            return changed;
         };
 
         let scs = syn.singleline_comment_start.as_bytes();
@@ -151,13 +200,15 @@ impl Row {
         while i < rlen {
             let c = self.render[i];
 
-            if in_string.is_none() && !scs.is_empty() && !in_comment {
-                if self.render[i..].starts_with(scs) {
-                    for slot in &mut self.hl[i..] {
-                        *slot = Highlight::Comment;
-                    }
-                    break;
+            if in_string.is_none()
+                && !scs.is_empty()
+                && !in_comment
+                && self.render[i..].starts_with(scs)
+            {
+                for slot in &mut self.hl[i..] {
+                    *slot = Highlight::Comment;
                 }
+                break;
             }
 
             if !mcs.is_empty() && !mce.is_empty() && in_string.is_none() {
@@ -208,7 +259,11 @@ impl Row {
             }
 
             if syn.highlight_numbers {
-                let prev_hl = if i > 0 { self.hl[i - 1] } else { Highlight::Normal };
+                let prev_hl = if i > 0 {
+                    self.hl[i - 1]
+                } else {
+                    Highlight::Normal
+                };
                 if (c.is_ascii_digit() && (prev_sep || prev_hl == Highlight::Number))
                     || (c == b'.' && prev_hl == Highlight::Number)
                 {
@@ -258,5 +313,47 @@ impl Row {
         let changed = self.hl_open_comment != in_comment;
         self.hl_open_comment = in_comment;
         changed
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn tab_coordinates_round_trip() {
+        let mut row = Row::new(b"\ta\tb".to_vec());
+        row.update(None, false);
+        assert_eq!(row.render, b"        a       b");
+        for cx in 0..=row.chars.len() {
+            assert_eq!(row.rx_to_cx(row.cx_to_rx(cx)), cx);
+        }
+        assert_eq!(row.rx_to_cx(7), 0);
+        assert_eq!(row.rx_to_cx(16), 3);
+    }
+
+    #[test]
+    fn removing_syntax_clears_multiline_state() {
+        let mut row = Row::new(b"/* open".to_vec());
+        assert!(row.update(Some(&C_SYNTAX), false));
+        assert!(row.hl_open_comment);
+        assert!(row.update(None, false));
+        assert!(!row.hl_open_comment);
+        assert!(row.hl.iter().all(|&hl| hl == Highlight::Normal));
+    }
+
+    #[test]
+    fn comments_strings_and_keyword_boundaries() {
+        let mut row = Row::new(b"{return} \"// string\" // comment".to_vec());
+        row.update(Some(&C_SYNTAX), false);
+        assert!(row.hl[1..7].iter().all(|&h| h == Highlight::Keyword1));
+        assert_eq!(row.hl[10], Highlight::String);
+        assert_eq!(row.hl.last(), Some(&Highlight::Comment));
+        let mut next = Row::new(b"still comment */ let x = 42;".to_vec());
+        next.update(Some(&C_SYNTAX), true);
+        assert_eq!(next.hl[0], Highlight::MlComment);
+        assert!(!next.hl_open_comment);
+        assert_eq!(next.hl[17], Highlight::Keyword1);
+        assert_eq!(next.hl[25], Highlight::Number);
     }
 }

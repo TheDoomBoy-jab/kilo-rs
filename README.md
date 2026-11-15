@@ -1,109 +1,96 @@
 # kilo-rs
 
-### Autonomous Clean-Room Port of Antirez's Kilo Editor in Idiomatic Rust
+A small Rust terminal text editor inspired by [antirez/kilo](https://github.com/antirez/kilo), for macOS and Linux. It uses `libc` for POSIX terminal control and reuses a frame buffer across redraws.
 
-> **Reverse-engineered from a stripped ARM64 Mach-O binary using REA + Hopper Disassembler, re-architected with zero-realloc rendering and compile-time memory safety.**
+## Build and run
 
-[![Language: Rust](https://img.shields.io/badge/Language-Rust%202024-orange?logo=rust&logoColor=white)](https://www.rust-lang.org/)
-[![Platform: macOS & Linux](https://img.shields.io/badge/Platform-macOS%20(ARM64)%20%7C%20Linux-black?logo=apple&logoColor=white)](https://apple.com)
-[![Reverse Engineering: REA & Hopper](https://img.shields.io/badge/Reverse%20Engineering-REA%20%7C%20Hopper-blueviolet)](https://github.com/morluto/rea)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+Requires Rust with edition 2024 support (1.85 or newer) and an interactive POSIX terminal.
 
----
-
-## Overview
-
-[Kilo](https://github.com/antirez/kilo) by Salvatore Sanfilippo (creator of Redis) is a celebrated ~1,000-line text editor written in C with zero external library dependencies.
-
-This repository is a **clean-room re-implementation in pure Rust**, created by compiling Kilo into an aggressive stripped release binary (`gcc -O2 -s -o kilo_stripped kilo.c`), inspecting control flow graphs and memory layouts via **Hopper Disassembler and the REA framework**, and re-architecting the system in Rust.
-
-```
-┌────────────────────────┐
-│  kilo_stripped binary  │ (Stripped Mach-O ARM64, 0 symbols)
-└───────────┬────────────┘
-            │
-            ▼
-┌────────────────────────┐
-│   Hopper & REA Engine  │ ──► Decompiled 74 procedures & recovered
-└───────────┬────────────┘     0x30-byte struct layouts & inlined loops
-            │
-            ▼
-┌────────────────────────┐
-│     kilo-rs (Rust)     │ ──► RAII RawModeGuard, zero-realloc frame
-└────────────────────────┘     buffer, and guaranteed memory safety
-```
-
----
-
-## Key Architectural Upgrades over C
-
-| Subsystem | C Implementation (`kilo.c`) | Rust Implementation (`kilo-rs`) |
-| :--- | :--- | :--- |
-| **Terminal Raw Mode** | Global state + `atexit()`. If a crash (`SIGSEGV`) occurs, the user's terminal is left bricked (no echo/cursor). | **`RawModeGuard` RAII struct**: Implements `Drop` trait. Terminal restoration is guaranteed even during panics. |
-| **Frame Double-Buffering** | `editorRefreshScreen` inlines `realloc()` on **every character and ANSI color escape** (200–500 heap reallocs per keypress). | **Zero-realloc frame rendering**: Reuses pre-allocated `frame_buf: Vec<u8>`. `clear()` retains heap capacity across frames. |
-| **Row Storage & Splicing** | Raw pointer arithmetic (`char *`, `memmove`), prone to buffer overflows and use-after-free bugs. | Safe `Vec<u8>` slices with bounds checking. |
-| **Key Event Parsing** | Raw integer constants (`1000+`) that can collide with byte ranges. | Strongly-typed `enum Key` handling VT100 multi-byte escape sequences (`\x1b[A`, `\x1b[5~`). |
-
----
-
-## Performance Benchmarks
-
-Measured on macOS (Apple Silicon M-series) over an automated pseudo-terminal (PTY) workload running on `kilo.c`:
-
-```
-┌─────────────────────────────────┬──────────────────┬──────────────────┐
-│ Benchmark Metric                │ C (kilo_stripped)│ Rust (kilo-rs)   │
-├─────────────────────────────────┼──────────────────┼──────────────────┤
-│ Active Render Time (200 scrolls)│ 59.04 ms         │ 58.30 ms (~1.2% faster)│
-│ Frame Reallocations per Frame   │ 200 – 500        │ Exactly 0        │
-│ Peak Memory (Cold Parse)        │ 1.22 MB          │ 1.60 MB          │
-│ Binary Size (Stripped)          │ 67 KB            │ 368 KB           │
-│ Memory Safety Guarantees        │ None (Manual C)  │ 100% Compile-Time│
-└─────────────────────────────────┴──────────────────┴──────────────────┘
-```
-
----
-
-## Project Structure
-
-```
-kilo-rs/
-├── Cargo.toml
-├── src/
-│   ├── main.rs       # Entry point, SIGWINCH handling & game loop
-│   ├── terminal.rs   # RawModeGuard (termios + ioctl TIOCGWINSZ)
-│   ├── input.rs      # Key enum & VT100 escape sequence decoder
-│   ├── row.rs        # Row buffer, tab expansion & syntax state machine
-│   └── editor.rs     # Zero-realloc frame buffer, File I/O, Search & cursor logic
-```
-
----
-
-## Getting Started
-
-### Prerequisites
-- [Rust toolchain](https://rustup.rs/) (edition 2024 / 1.85+)
-
-### Build & Run
-```bash
-# Clone the repository
-git clone https://github.com/TheDoomBoy-jab/kilo-rs.git
-cd kilo-rs
-
-# Build release binary
+```sh
 cargo build --release
-
-# Run on any text file
 ./target/release/kilo-rs src/editor.rs
 ```
 
-### Keybindings
-- **Arrow Keys / PageUp / PageDown / Home / End**: Navigate file
-- **Ctrl-S**: Save to disk
-- **Ctrl-F**: Incremental search (use Arrows/Enter to jump, ESC to cancel)
-- **Ctrl-Q**: Quit (requires 3 presses if unsaved changes exist)
+Passing a nonexistent filename starts a new buffer. Other file read errors are reported.
 
----
+## Keys
 
-## License
-MIT License. Inspired by [antirez/kilo](https://github.com/antirez/kilo).
+- Arrow keys, PageUp, PageDown, Home, End: navigate.
+- Enter, Tab, Backspace, Delete: edit.
+- Ctrl-S: save.
+- Ctrl-F: incremental search; arrows move between matching rows, Enter accepts, Escape cancels.
+- Ctrl-Q: quit. With unsaved changes, press four consecutive times; another key resets the warning counter.
+
+## Behavior and limits
+
+The editor expands tabs to eight columns and provides basic C-style syntax highlighting for C, C++ and Rust extensions. Its highlighting is a small state machine, rather than a full language parser.
+
+Editing and cursor movement operate on bytes. Non-ASCII bytes and control bytes are displayed as placeholders; Unicode character widths and grapheme-aware editing are not supported. File bytes remain intact unless edited. Filenames supplied through the CLI must be valid UTF-8.
+
+Saving preserves existing LF/CRLF line endings and whether the file has a final newline. Newly inserted line breaks use LF. Saves write a temporary file beside the destination, sync it, then rename it over the destination. This requires write access to the parent directory, preserves permission bits and follows existing symlinks. Replacement changes the inode: ownership, extended attributes and hard-link relationships are not preserved.
+
+Terminal attributes and cursor visibility are restored on normal exit, returned errors and Rust panic unwinding. Forced termination and aborts do not run Rust destructors.
+
+The frame buffer retains its capacity, but can grow for larger screens. Formatting and search can allocate; there is no verified zero-allocation guarantee.
+
+## Checks
+
+```sh
+cargo fmt --all -- --check
+cargo clippy --all-targets -- -D warnings
+cargo test
+cargo build
+python3 -m unittest discover -s tests -v
+```
+
+The tests cover editing sequences, syntax propagation, byte-preserving saves, file errors, key sequences, search coordinates, idle resize handling, and terminal restoration. PTY integration tests require macOS or Linux and the debug binary built by `cargo build`.
+
+## Benchmarks
+
+For a quick local redraw benchmark:
+
+```sh
+cargo build --release
+python3 benchmark.py ./target/release/kilo-rs --scrolls 200 --runs 3
+```
+
+For the checked C/Rust comparison:
+
+```sh
+python3 outputs/benchmark-checked.py \
+  --c-bin /path/to/kilo_stripped \
+  --rust-bin ./target/release/kilo-rs \
+  --file /path/to/kilo.c
+```
+
+That harness checks complete frames, logical line movement, the scrolling boundary and clean exit; it randomizes binary order across trials. Startup is excluded. Results measure PTY input-to-complete-frame wall time, not isolated render CPU time, terminal-emulator painting, allocations or memory usage.
+
+The local run on November 15, 2026 used a 24×80 PTY, 10 warmup Down keys and 200 measured Down keys per trial, with seven trials per binary:
+
+| Existing local binary | Median per 200 redraws | Minimum–maximum |
+| --- | ---: | ---: |
+| C `kilo_stripped` | 13.22 ms | 11.93–15.40 ms |
+| Rust release | 6.48 ms | 5.77–8.43 ms |
+
+Rust's median was 51.0% lower in this run. Both binaries moved from line 54 to 254 of the same 1,308-line file in every trial. The C binary was pre-existing; its compiler settings were not independently reproduced. These are local measurements, not a general performance guarantee. See [the full benchmark report](outputs/benchmark-report.md) and [raw measurements, workload hash and binary hashes](outputs/benchmark-checked-results.json).
+
+## Stack flame graphs
+
+The [C/Rust flame graph comparison](outputs/flames/README.md) includes PNGs, SVGs, raw samples, folded stacks and exact build commands. These are eight-second macOS wall-clock stack samples, including terminal I/O waits; they are not CPU-only measurements.
+
+![C and Rust sampled-stack flame graphs](outputs/flames/comparison.png)
+
+The profiling harness is `scripts/profile_flames.py`. It needs optimized binaries with symbols/frame pointers, macOS `sample` and `atos`, LLVM `llvm-cxxfilt`, and `rsvg-convert`. See the linked report for reproduction and interpretation.
+
+## Source files
+
+- `src/main.rs`: startup and resize event loop.
+- `src/terminal.rs`: raw terminal mode and window size queries.
+- `src/input.rs`: key and escape-sequence decoding.
+- `src/row.rs`: row buffers, tab coordinates and highlighting.
+- `src/editor.rs`: editing, rendering, search and file I/O.
+- `benchmark.py`: portable single/multiple-binary PTY benchmark.
+- `outputs/benchmark-checked.py`: the supplied checked comparison harness.
+- `tests/test_terminal.py`: executable-level PTY integration tests.
+
+`repomix-output.xml` is an older generated repository snapshot; use the source files above for the current implementation.

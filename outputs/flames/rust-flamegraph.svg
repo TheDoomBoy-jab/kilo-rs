@@ -1,0 +1,330 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="510" viewBox="0 0 2200 510">
+<rect width="100%" height="100%" fill="#fffaf5"/>
+<style>text{font-family:Menlo,monospace;fill:#292524}.frame{stroke:#fffaf5;stroke-width:0.6}</style>
+<text x="30" y="44" font-size="29" font-weight="bold">Rust implementation — sampled-stack flame graph</text>
+<text x="30" y="76" font-size="16">macOS sample • 8 s • 1 ms interval • 6,186 stack samples</text>
+<text x="30" y="102" font-size="16">Width = share of sampled stacks, including terminal I/O waits. Each graph is normalized independently.</text>
+<text x="30" y="486" font-size="14">Bottom → top: caller → callee. Blue/gray = syscall or synchronization frame; warm colors = other functions.</text>
+<g><title>all samples — 6,186 samples (100.0%)</title><rect class="frame" x="30.000" y="445" width="2140.000" height="24" fill="rgb(243,178,66)"/>
+<text x="34.000" y="462" font-size="12">all samples — 6,186 samples (100.0%)</text>
+</g>
+<g><title>kilo_rs::main — 6,185 samples (100.0%)</title><rect class="frame" x="30.000" y="420" width="2139.654" height="24" fill="rgb(245,115,117)"/>
+<text x="34.000" y="437" font-size="12">kilo_rs::main — 6,185 samples (100.0%)</text>
+</g>
+<g><title>&lt;kilo_rs::editor::Editor&gt;::refresh_screen — 5,711 samples (92.3%)</title><rect class="frame" x="30.000" y="395" width="1975.677" height="24" fill="rgb(237,201,66)"/>
+<text x="34.000" y="412" font-size="12">&lt;kilo_rs::editor::Editor&gt;::refresh_screen — 5,711 samples (92.3%)</text>
+</g>
+<g><title>&lt;std::io::stdio::StdoutLock as std::io::Write&gt;::write_all — 3,584 samples (57.9%)</title><rect class="frame" x="30.000" y="370" width="1239.858" height="24" fill="rgb(242,181,118)"/>
+<text x="34.000" y="387" font-size="12">&lt;std::io::stdio::StdoutLock as std::io::Write&gt;::write_all — 3,584 samples (57.9%)</text>
+</g>
+<g><title>&lt;std::sys::stdio::unix::Stdout as std::io::Write&gt;::write_all — 3,538 samples (57.2%)</title><rect class="frame" x="30.000" y="345" width="1223.944" height="24" fill="rgb(231,124,96)"/>
+<text x="34.000" y="362" font-size="12">&lt;std::sys::stdio::unix::Stdout as std::io::Write&gt;::write_all — 3,538 samples (57.2%)</text>
+</g>
+<g><title>write — 3,532 samples (57.1%)</title><rect class="frame" x="30.000" y="320" width="1221.869" height="24" fill="#93b6c7"/>
+<text x="34.000" y="337" font-size="12">write — 3,532 samples (57.1%)</text>
+</g>
+<g><title>core::slice::memchr::memrchr — 11 samples (0.2%)</title><rect class="frame" x="1253.944" y="345" width="3.805" height="24" fill="rgb(243,181,121)"/>
+</g>
+<g><title>DYLD-STUB$$memcpy — 4 samples (0.1%)</title><rect class="frame" x="1257.750" y="345" width="1.384" height="24" fill="rgb(231,156,95)"/>
+</g>
+<g><title>_platform_memmove — 4 samples (0.1%)</title><rect class="frame" x="1259.134" y="345" width="1.384" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>write — 3 samples (0.0%)</title><rect class="frame" x="1260.517" y="345" width="1.038" height="24" fill="#93b6c7"/>
+</g>
+<g><title>&lt;std::io::stdio::StdoutLock as std::io::Write&gt;::flush — 579 samples (9.4%)</title><rect class="frame" x="1269.858" y="370" width="200.301" height="24" fill="rgb(243,202,101)"/>
+<text x="1273.858" y="387" font-size="12">&lt;std::io::stdio::StdoutLo…</text>
+</g>
+<g><title>&lt;std::io::buffered::bufwriter::BufWriter&lt;std::io::stdio::StdoutRaw&gt;&gt;::flush_buf — 572 samples (9.2%)</title><rect class="frame" x="1269.858" y="345" width="197.879" height="24" fill="rgb(233,149,125)"/>
+<text x="1273.858" y="362" font-size="12">&lt;std::io::buffered::bufwr…</text>
+</g>
+<g><title>write — 562 samples (9.1%)</title><rect class="frame" x="1269.858" y="320" width="194.420" height="24" fill="#93b6c7"/>
+<text x="1273.858" y="337" font-size="12">write…</text>
+</g>
+<g><title>_platform_memmove — 5 samples (0.1%)</title><rect class="frame" x="1464.277" y="320" width="1.730" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>&lt;alloc::vec::Vec&lt;u8&gt; as std::io::Write&gt;::write_fmt — 321 samples (5.2%)</title><rect class="frame" x="1470.158" y="370" width="111.048" height="24" fill="rgb(227,144,109)"/>
+<text x="1474.158" y="387" font-size="12">&lt;alloc::vec::…</text>
+</g>
+<g><title>core::fmt::write — 291 samples (4.7%)</title><rect class="frame" x="1470.158" y="345" width="100.669" height="24" fill="rgb(236,175,80)"/>
+<text x="1474.158" y="362" font-size="12">core::fmt::…</text>
+</g>
+<g><title>&lt;u8 as core::fmt::Display&gt;::fmt — 100 samples (1.6%)</title><rect class="frame" x="1470.158" y="320" width="34.594" height="24" fill="rgb(227,136,93)"/>
+<text x="1474.158" y="337" font-size="12">&lt;u…</text>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad_integral — 41 samples (0.7%)</title><rect class="frame" x="1470.158" y="295" width="14.184" height="24" fill="rgb(232,116,82)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad_integral::write_prefix — 6 samples (0.1%)</title><rect class="frame" x="1470.158" y="270" width="2.076" height="24" fill="rgb(230,112,99)"/>
+</g>
+<g><title>&lt;std::io::default_write_fmt::Adapter&lt;alloc::vec::Vec&lt;u8&gt;&gt; as core::fmt::Write&gt;::write_str — 18 samples (0.3%)</title><rect class="frame" x="1484.342" y="295" width="6.227" height="24" fill="rgb(235,116,67)"/>
+</g>
+<g><title>_platform_memmove — 13 samples (0.2%)</title><rect class="frame" x="1484.342" y="270" width="4.497" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>DYLD-STUB$$memcpy — 3 samples (0.0%)</title><rect class="frame" x="1488.839" y="270" width="1.038" height="24" fill="rgb(231,156,95)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad_integral::write_prefix — 15 samples (0.2%)</title><rect class="frame" x="1490.569" y="295" width="5.189" height="24" fill="rgb(230,112,99)"/>
+</g>
+<g><title>&lt;std::io::default_write_fmt::Adapter&lt;alloc::vec::Vec&lt;u8&gt;&gt; as core::fmt::Write&gt;::write_str — 92 samples (1.5%)</title><rect class="frame" x="1504.753" y="320" width="31.827" height="24" fill="rgb(235,116,67)"/>
+<text x="1508.753" y="337" font-size="12">&lt;s…</text>
+</g>
+<g><title>_platform_memmove — 62 samples (1.0%)</title><rect class="frame" x="1504.753" y="295" width="21.448" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>DYLD-STUB$$memcpy — 10 samples (0.2%)</title><rect class="frame" x="1526.201" y="295" width="3.459" height="24" fill="rgb(231,156,95)"/>
+</g>
+<g><title>&lt;u64 as core::fmt::Display&gt;::fmt — 8 samples (0.1%)</title><rect class="frame" x="1536.579" y="320" width="2.768" height="24" fill="rgb(242,204,108)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad_integral — 3 samples (0.0%)</title><rect class="frame" x="1536.579" y="295" width="1.038" height="24" fill="rgb(232,116,82)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad_integral::write_prefix — 1 samples (0.0%)</title><rect class="frame" x="1536.579" y="270" width="0.346" height="24" fill="rgb(230,112,99)"/>
+</g>
+<g><title>&lt;std::io::default_write_fmt::Adapter&lt;alloc::vec::Vec&lt;u8&gt;&gt; as core::fmt::Write&gt;::write_str — 3 samples (0.0%)</title><rect class="frame" x="1537.617" y="295" width="1.038" height="24" fill="rgb(235,116,67)"/>
+</g>
+<g><title>_platform_memmove — 2 samples (0.0%)</title><rect class="frame" x="1537.617" y="270" width="0.692" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>&lt;u64&gt;::_fmt_inner — 2 samples (0.0%)</title><rect class="frame" x="1538.655" y="295" width="0.692" height="24" fill="rgb(233,124,96)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad_integral — 7 samples (0.1%)</title><rect class="frame" x="1539.347" y="320" width="2.422" height="24" fill="rgb(232,116,82)"/>
+</g>
+<g><title>&lt;std::io::default_write_fmt::Adapter&lt;alloc::vec::Vec&lt;u8&gt;&gt; as core::fmt::Write&gt;::write_str — 18 samples (0.3%)</title><rect class="frame" x="1570.828" y="345" width="6.227" height="24" fill="rgb(235,116,67)"/>
+</g>
+<g><title>alloc::fmt::format::format_inner — 124 samples (2.0%)</title><rect class="frame" x="1581.206" y="370" width="42.897" height="24" fill="rgb(230,186,108)"/>
+<text x="1585.206" y="387" font-size="12">all…</text>
+</g>
+<g><title>core::fmt::write — 106 samples (1.7%)</title><rect class="frame" x="1581.206" y="345" width="36.670" height="24" fill="rgb(236,175,80)"/>
+<text x="1585.206" y="362" font-size="12">co…</text>
+</g>
+<g><title>&lt;alloc::string::String as core::fmt::Write&gt;::write_str — 47 samples (0.8%)</title><rect class="frame" x="1581.206" y="320" width="16.259" height="24" fill="rgb(230,201,74)"/>
+</g>
+<g><title>&lt;alloc::raw_vec::RawVecInner&lt;_&gt;&gt;::reserve::do_reserve_and_handle::&lt;alloc::alloc::Global&gt; — 38 samples (0.6%)</title><rect class="frame" x="1581.206" y="295" width="13.146" height="24" fill="rgb(227,190,90)"/>
+</g>
+<g><title>&lt;alloc::raw_vec::RawVecInner&gt;::finish_grow — 34 samples (0.5%)</title><rect class="frame" x="1581.206" y="270" width="11.762" height="24" fill="rgb(247,125,120)"/>
+</g>
+<g><title>_realloc — 18 samples (0.3%)</title><rect class="frame" x="1581.206" y="245" width="6.227" height="24" fill="rgb(235,181,112)"/>
+</g>
+<g><title>_malloc_zone_realloc — 15 samples (0.2%)</title><rect class="frame" x="1581.206" y="220" width="5.189" height="24" fill="rgb(229,158,110)"/>
+</g>
+<g><title>szone_realloc — 14 samples (0.2%)</title><rect class="frame" x="1581.206" y="195" width="4.843" height="24" fill="rgb(232,165,99)"/>
+</g>
+<g><title>tiny_try_realloc_in_place — 9 samples (0.1%)</title><rect class="frame" x="1581.206" y="170" width="3.113" height="24" fill="rgb(237,176,87)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 2 samples (0.0%)</title><rect class="frame" x="1581.206" y="145" width="0.692" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>tiny_free_list_remove_ptr — 2 samples (0.0%)</title><rect class="frame" x="1581.898" y="145" width="0.692" height="24" fill="rgb(235,208,75)"/>
+</g>
+<g><title>szone_size — 3 samples (0.0%)</title><rect class="frame" x="1584.319" y="170" width="1.038" height="24" fill="rgb(225,122,67)"/>
+</g>
+<g><title>tiny_size — 3 samples (0.0%)</title><rect class="frame" x="1584.319" y="145" width="1.038" height="24" fill="rgb(246,116,75)"/>
+</g>
+<g><title>szone_malloc_should_clear — 1 samples (0.0%)</title><rect class="frame" x="1585.357" y="170" width="0.346" height="24" fill="rgb(240,147,120)"/>
+</g>
+<g><title>tiny_malloc_should_clear — 1 samples (0.0%)</title><rect class="frame" x="1585.357" y="145" width="0.346" height="24" fill="rgb(229,121,120)"/>
+</g>
+<g><title>szone_size — 2 samples (0.0%)</title><rect class="frame" x="1586.395" y="220" width="0.692" height="24" fill="rgb(225,122,67)"/>
+</g>
+<g><title>tiny_size — 2 samples (0.0%)</title><rect class="frame" x="1586.395" y="195" width="0.692" height="24" fill="rgb(246,116,75)"/>
+</g>
+<g><title>szone_malloc_should_clear — 8 samples (0.1%)</title><rect class="frame" x="1587.433" y="245" width="2.768" height="24" fill="rgb(240,147,120)"/>
+</g>
+<g><title>tiny_malloc_should_clear — 7 samples (0.1%)</title><rect class="frame" x="1587.433" y="220" width="2.422" height="24" fill="rgb(229,121,120)"/>
+</g>
+<g><title>tiny_malloc_from_free_list — 5 samples (0.1%)</title><rect class="frame" x="1587.433" y="195" width="1.730" height="24" fill="rgb(242,144,81)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 3 samples (0.0%)</title><rect class="frame" x="1587.433" y="170" width="1.038" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>_malloc_zone_malloc — 3 samples (0.0%)</title><rect class="frame" x="1590.200" y="245" width="1.038" height="24" fill="rgb(225,133,85)"/>
+</g>
+<g><title>DYLD-STUB$$malloc — 1 samples (0.0%)</title><rect class="frame" x="1591.238" y="245" width="0.346" height="24" fill="rgb(229,120,101)"/>
+</g>
+<g><title>__rustc::__rust_no_alloc_shim_is_unstable_v2 — 1 samples (0.0%)</title><rect class="frame" x="1591.584" y="245" width="0.346" height="24" fill="rgb(237,132,87)"/>
+</g>
+<g><title>szone_size — 1 samples (0.0%)</title><rect class="frame" x="1591.930" y="245" width="0.346" height="24" fill="rgb(225,122,67)"/>
+</g>
+<g><title>__rustc::__rust_alloc — 2 samples (0.0%)</title><rect class="frame" x="1592.968" y="270" width="0.692" height="24" fill="rgb(249,111,99)"/>
+</g>
+<g><title>szone_malloc_should_clear — 1 samples (0.0%)</title><rect class="frame" x="1593.660" y="270" width="0.346" height="24" fill="rgb(240,147,120)"/>
+</g>
+<g><title>_platform_memmove — 4 samples (0.1%)</title><rect class="frame" x="1594.352" y="295" width="1.384" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>DYLD-STUB$$memcpy — 1 samples (0.0%)</title><rect class="frame" x="1595.736" y="295" width="0.346" height="24" fill="rgb(231,156,95)"/>
+</g>
+<g><title>&lt;u64 as core::fmt::Display&gt;::fmt — 30 samples (0.5%)</title><rect class="frame" x="1597.465" y="320" width="10.378" height="24" fill="rgb(242,204,108)"/>
+</g>
+<g><title>&lt;alloc::string::String as core::fmt::Write&gt;::write_str — 23 samples (0.4%)</title><rect class="frame" x="1597.465" y="295" width="7.957" height="24" fill="rgb(230,201,74)"/>
+</g>
+<g><title>&lt;alloc::raw_vec::RawVecInner&lt;_&gt;&gt;::reserve::do_reserve_and_handle::&lt;alloc::alloc::Global&gt; — 12 samples (0.2%)</title><rect class="frame" x="1597.465" y="270" width="4.151" height="24" fill="rgb(227,190,90)"/>
+</g>
+<g><title>&lt;alloc::raw_vec::RawVecInner&gt;::finish_grow — 10 samples (0.2%)</title><rect class="frame" x="1597.465" y="245" width="3.459" height="24" fill="rgb(247,125,120)"/>
+</g>
+<g><title>szone_malloc_should_clear — 7 samples (0.1%)</title><rect class="frame" x="1597.465" y="220" width="2.422" height="24" fill="rgb(240,147,120)"/>
+</g>
+<g><title>tiny_malloc_should_clear — 7 samples (0.1%)</title><rect class="frame" x="1597.465" y="195" width="2.422" height="24" fill="rgb(229,121,120)"/>
+</g>
+<g><title>tiny_malloc_from_free_list — 3 samples (0.0%)</title><rect class="frame" x="1597.465" y="170" width="1.038" height="24" fill="rgb(242,144,81)"/>
+</g>
+<g><title>_tiny_check_and_zero_inline_meta_from_freelist — 2 samples (0.0%)</title><rect class="frame" x="1597.465" y="145" width="0.692" height="24" fill="rgb(232,135,124)"/>
+</g>
+<g><title>rack_get_thread_index — 2 samples (0.0%)</title><rect class="frame" x="1598.503" y="170" width="0.692" height="24" fill="rgb(233,116,104)"/>
+</g>
+<g><title>_tiny_check_and_zero_inline_meta_from_freelist — 1 samples (0.0%)</title><rect class="frame" x="1599.195" y="170" width="0.346" height="24" fill="rgb(232,135,124)"/>
+</g>
+<g><title>__rustc::__rdl_alloc — 1 samples (0.0%)</title><rect class="frame" x="1599.887" y="220" width="0.346" height="24" fill="rgb(242,145,112)"/>
+</g>
+<g><title>_malloc_zone_malloc — 1 samples (0.0%)</title><rect class="frame" x="1600.233" y="220" width="0.346" height="24" fill="rgb(225,133,85)"/>
+</g>
+<g><title>_platform_memmove — 8 samples (0.1%)</title><rect class="frame" x="1601.617" y="270" width="2.768" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>DYLD-STUB$$memcpy — 1 samples (0.0%)</title><rect class="frame" x="1604.384" y="270" width="0.346" height="24" fill="rgb(231,156,95)"/>
+</g>
+<g><title>&lt;u64&gt;::_fmt_inner — 4 samples (0.1%)</title><rect class="frame" x="1605.422" y="295" width="1.384" height="24" fill="rgb(233,124,96)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad_integral — 2 samples (0.0%)</title><rect class="frame" x="1606.806" y="295" width="0.692" height="24" fill="rgb(232,116,82)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad_integral::write_prefix — 1 samples (0.0%)</title><rect class="frame" x="1606.806" y="270" width="0.346" height="24" fill="rgb(230,112,99)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad — 16 samples (0.3%)</title><rect class="frame" x="1607.844" y="320" width="5.535" height="24" fill="rgb(243,177,126)"/>
+</g>
+<g><title>&lt;u64&gt;::_fmt_inner — 2 samples (0.0%)</title><rect class="frame" x="1613.379" y="320" width="0.692" height="24" fill="rgb(233,124,96)"/>
+</g>
+<g><title>&lt;&amp;str as core::fmt::Display&gt;::fmt — 1 samples (0.0%)</title><rect class="frame" x="1614.070" y="320" width="0.346" height="24" fill="rgb(232,133,83)"/>
+</g>
+<g><title>&lt;alloc::raw_vec::RawVecInner&lt;_&gt;&gt;::reserve::do_reserve_and_handle::&lt;alloc::alloc::Global&gt; — 1 samples (0.0%)</title><rect class="frame" x="1614.416" y="320" width="0.346" height="24" fill="rgb(227,190,90)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad_integral — 1 samples (0.0%)</title><rect class="frame" x="1614.762" y="320" width="0.346" height="24" fill="rgb(232,116,82)"/>
+</g>
+<g><title>&lt;str as core::fmt::Display&gt;::fmt — 1 samples (0.0%)</title><rect class="frame" x="1615.108" y="320" width="0.346" height="24" fill="rgb(244,141,97)"/>
+</g>
+<g><title>&lt;alloc::string::String as core::fmt::Write&gt;::write_str — 1 samples (0.0%)</title><rect class="frame" x="1617.876" y="345" width="0.346" height="24" fill="rgb(230,201,74)"/>
+</g>
+<g><title>&lt;core::fmt::Formatter&gt;::pad — 1 samples (0.0%)</title><rect class="frame" x="1618.222" y="345" width="0.346" height="24" fill="rgb(243,177,126)"/>
+</g>
+<g><title>&lt;u64 as core::fmt::Display&gt;::fmt — 1 samples (0.0%)</title><rect class="frame" x="1618.568" y="345" width="0.346" height="24" fill="rgb(242,204,108)"/>
+</g>
+<g><title>free_tiny — 32 samples (0.5%)</title><rect class="frame" x="1624.103" y="370" width="11.070" height="24" fill="rgb(240,170,107)"/>
+</g>
+<g><title>tiny_free_no_lock — 18 samples (0.3%)</title><rect class="frame" x="1624.103" y="345" width="6.227" height="24" fill="rgb(245,147,80)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 6 samples (0.1%)</title><rect class="frame" x="1624.103" y="320" width="2.076" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>tiny_free_list_remove_ptr — 2 samples (0.0%)</title><rect class="frame" x="1626.178" y="320" width="0.692" height="24" fill="rgb(235,208,75)"/>
+</g>
+<g><title>get_tiny_previous_free_msize — 1 samples (0.0%)</title><rect class="frame" x="1626.870" y="320" width="0.346" height="24" fill="rgb(235,162,86)"/>
+</g>
+<g><title>_platform_memset — 2 samples (0.0%)</title><rect class="frame" x="1630.330" y="345" width="0.692" height="24" fill="rgb(228,126,105)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 2 samples (0.0%)</title><rect class="frame" x="1631.022" y="345" width="0.692" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>DYLD-STUB$$_platform_memset — 1 samples (0.0%)</title><rect class="frame" x="1631.714" y="345" width="0.346" height="24" fill="rgb(228,143,82)"/>
+</g>
+<g><title>&lt;std::time::Instant&gt;::elapsed — 19 samples (0.3%)</title><rect class="frame" x="1635.173" y="370" width="6.573" height="24" fill="rgb(228,168,94)"/>
+</g>
+<g><title>&lt;std::sys::pal::unix::time::Timespec&gt;::now — 17 samples (0.3%)</title><rect class="frame" x="1635.173" y="345" width="5.881" height="24" fill="rgb(239,154,117)"/>
+</g>
+<g><title>clock_gettime — 17 samples (0.3%)</title><rect class="frame" x="1635.173" y="320" width="5.881" height="24" fill="rgb(232,116,126)"/>
+</g>
+<g><title>clock_gettime_nsec_np — 16 samples (0.3%)</title><rect class="frame" x="1635.173" y="295" width="5.535" height="24" fill="rgb(246,198,65)"/>
+</g>
+<g><title>mach_absolute_time — 10 samples (0.2%)</title><rect class="frame" x="1635.173" y="270" width="3.459" height="24" fill="rgb(239,120,109)"/>
+</g>
+<g><title>DYLD-STUB$$mach_absolute_time — 1 samples (0.0%)</title><rect class="frame" x="1638.632" y="270" width="0.346" height="24" fill="rgb(249,191,68)"/>
+</g>
+<g><title>DYLD-STUB$$mach_timebase_info — 1 samples (0.0%)</title><rect class="frame" x="1638.978" y="270" width="0.346" height="24" fill="rgb(235,130,108)"/>
+</g>
+<g><title>mach_timebase_info — 1 samples (0.0%)</title><rect class="frame" x="1639.324" y="270" width="0.346" height="24" fill="rgb(248,126,90)"/>
+</g>
+<g><title>mach_timebase_info — 1 samples (0.0%)</title><rect class="frame" x="1640.708" y="295" width="0.346" height="24" fill="rgb(248,126,90)"/>
+</g>
+<g><title>&lt;std::sys::pal::unix::time::Timespec&gt;::sub_timespec — 1 samples (0.0%)</title><rect class="frame" x="1641.054" y="345" width="0.346" height="24" fill="rgb(247,162,71)"/>
+</g>
+<g><title>core::fmt::write — 15 samples (0.2%)</title><rect class="frame" x="1641.746" y="370" width="5.189" height="24" fill="rgb(236,175,80)"/>
+</g>
+<g><title>szone_malloc_should_clear — 11 samples (0.2%)</title><rect class="frame" x="1646.935" y="370" width="3.805" height="24" fill="rgb(240,147,120)"/>
+</g>
+<g><title>tiny_malloc_should_clear — 10 samples (0.2%)</title><rect class="frame" x="1646.935" y="345" width="3.459" height="24" fill="rgb(229,121,120)"/>
+</g>
+<g><title>tiny_malloc_from_free_list — 4 samples (0.1%)</title><rect class="frame" x="1646.935" y="320" width="1.384" height="24" fill="rgb(242,144,81)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 1 samples (0.0%)</title><rect class="frame" x="1646.935" y="295" width="0.346" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>rack_get_thread_index — 3 samples (0.0%)</title><rect class="frame" x="1648.319" y="320" width="1.038" height="24" fill="rgb(233,116,104)"/>
+</g>
+<g><title>_tiny_check_and_zero_inline_meta_from_freelist — 1 samples (0.0%)</title><rect class="frame" x="1649.357" y="320" width="0.346" height="24" fill="rgb(232,135,124)"/>
+</g>
+<g><title>tiny_free_list_add_ptr — 1 samples (0.0%)</title><rect class="frame" x="1649.703" y="320" width="0.346" height="24" fill="rgb(225,144,106)"/>
+</g>
+<g><title>&lt;std::io::stdio::Stdout&gt;::lock — 5 samples (0.1%)</title><rect class="frame" x="1650.740" y="370" width="1.730" height="24" fill="rgb(232,116,95)"/>
+</g>
+<g><title>pthread_mutex_lock — 3 samples (0.0%)</title><rect class="frame" x="1650.740" y="345" width="1.038" height="24" fill="#93b6c7"/>
+</g>
+<g><title>_tlv_get_addr — 1 samples (0.0%)</title><rect class="frame" x="1651.778" y="345" width="0.346" height="24" fill="rgb(227,140,87)"/>
+</g>
+<g><title>&lt;std::sys::pal::unix::sync::mutex::Mutex&gt;::unlock — 5 samples (0.1%)</title><rect class="frame" x="1652.470" y="370" width="1.730" height="24" fill="rgb(238,157,126)"/>
+</g>
+<g><title>_free — 4 samples (0.1%)</title><rect class="frame" x="1654.200" y="370" width="1.384" height="24" fill="rgb(245,196,122)"/>
+</g>
+<g><title>_platform_memmove — 4 samples (0.1%)</title><rect class="frame" x="1655.584" y="370" width="1.384" height="24" fill="rgb(236,152,96)"/>
+</g>
+<g><title>_szone_free — 4 samples (0.1%)</title><rect class="frame" x="1656.967" y="370" width="1.384" height="24" fill="rgb(241,190,81)"/>
+</g>
+<g><title>core::str::converts::from_utf8 — 4 samples (0.1%)</title><rect class="frame" x="1658.351" y="370" width="1.384" height="24" fill="rgb(239,129,128)"/>
+</g>
+<g><title>&lt;std::io::buffered::bufwriter::BufWriter&lt;std::io::stdio::StdoutRaw&gt;&gt;::flush_buf — 2 samples (0.0%)</title><rect class="frame" x="1659.735" y="370" width="0.692" height="24" fill="rgb(233,149,125)"/>
+</g>
+<g><title>__rustc::__rust_alloc — 2 samples (0.0%)</title><rect class="frame" x="1660.427" y="370" width="0.692" height="24" fill="rgb(249,111,99)"/>
+</g>
+<g><title>__rustc::__rdl_alloc — 1 samples (0.0%)</title><rect class="frame" x="1661.119" y="370" width="0.346" height="24" fill="rgb(242,145,112)"/>
+</g>
+<g><title>_malloc_zone_malloc — 1 samples (0.0%)</title><rect class="frame" x="1661.465" y="370" width="0.346" height="24" fill="rgb(225,133,85)"/>
+</g>
+<g><title>pthread_mutex_unlock — 1 samples (0.0%)</title><rect class="frame" x="1661.811" y="370" width="0.346" height="24" fill="#93b6c7"/>
+</g>
+<g><title>std::io::stdio::stdout — 1 samples (0.0%)</title><rect class="frame" x="1662.156" y="370" width="0.346" height="24" fill="rgb(241,111,107)"/>
+</g>
+<g><title>szone_malloc_type_malloc — 1 samples (0.0%)</title><rect class="frame" x="1662.502" y="370" width="0.346" height="24" fill="rgb(246,110,96)"/>
+</g>
+<g><title>tiny_free_no_lock — 1 samples (0.0%)</title><rect class="frame" x="1662.848" y="370" width="0.346" height="24" fill="rgb(245,147,80)"/>
+</g>
+<g><title>kilo_rs::input::read_key — 446 samples (7.2%)</title><rect class="frame" x="2005.677" y="395" width="154.290" height="24" fill="rgb(237,119,115)"/>
+<text x="2009.677" y="412" font-size="12">kilo_rs::input::rea…</text>
+</g>
+<g><title>&lt;kilo_rs::input::read_byte as core::ops::function::FnMut&lt;()&gt;&gt;::call_mut — 431 samples (7.0%)</title><rect class="frame" x="2005.677" y="370" width="149.101" height="24" fill="rgb(229,152,109)"/>
+<text x="2009.677" y="387" font-size="12">&lt;kilo_rs::input::r…</text>
+</g>
+<g><title>&lt;std::io::stdio::Stdin as std::io::Read&gt;::read — 418 samples (6.8%)</title><rect class="frame" x="2005.677" y="345" width="144.604" height="24" fill="rgb(231,155,76)"/>
+<text x="2009.677" y="362" font-size="12">&lt;std::io::stdio::…</text>
+</g>
+<g><title>&lt;std::io::buffered::bufreader::BufReader&lt;std::io::stdio::StdinRaw&gt; as std::io::Read&gt;::read — 409 samples (6.6%)</title><rect class="frame" x="2005.677" y="320" width="141.490" height="24" fill="rgb(235,149,112)"/>
+<text x="2009.677" y="337" font-size="12">&lt;std::io::buffere…</text>
+</g>
+<g><title>read — 408 samples (6.6%)</title><rect class="frame" x="2005.677" y="295" width="141.145" height="24" fill="#93b6c7"/>
+<text x="2009.677" y="312" font-size="12">read…</text>
+</g>
+<g><title>pthread_mutex_unlock — 2 samples (0.0%)</title><rect class="frame" x="2147.168" y="320" width="0.692" height="24" fill="#93b6c7"/>
+</g>
+<g><title>DYLD-STUB$$pthread_mutex_lock — 1 samples (0.0%)</title><rect class="frame" x="2147.860" y="320" width="0.346" height="24" fill="#93b6c7"/>
+</g>
+<g><title>DYLD-STUB$$pthread_mutex_unlock — 1 samples (0.0%)</title><rect class="frame" x="2148.206" y="320" width="0.346" height="24" fill="#93b6c7"/>
+</g>
+<g><title>std::io::stdio::stdin — 6 samples (0.1%)</title><rect class="frame" x="2150.281" y="345" width="2.076" height="24" fill="rgb(225,139,83)"/>
+</g>
+<g><title>&lt;std::io::buffered::bufreader::BufReader&lt;std::io::stdio::StdinRaw&gt; as std::io::Read&gt;::read — 3 samples (0.0%)</title><rect class="frame" x="2152.357" y="345" width="1.038" height="24" fill="rgb(235,149,112)"/>
+</g>
+<g><title>pthread_mutex_lock — 1 samples (0.0%)</title><rect class="frame" x="2153.395" y="345" width="0.346" height="24" fill="#93b6c7"/>
+</g>
+<g><title>&lt;alloc::vec::Vec&lt;u8&gt; as std::io::Write&gt;::write_fmt — 4 samples (0.1%)</title><rect class="frame" x="2159.968" y="395" width="1.384" height="24" fill="rgb(227,144,109)"/>
+</g>
+<g><title>&lt;kilo_rs::editor::Editor&gt;::process_keypress — 2 samples (0.0%)</title><rect class="frame" x="2161.351" y="395" width="0.692" height="24" fill="rgb(239,204,80)"/>
+</g>
+<g><title>&lt;kilo_rs::input::read_byte as core::ops::function::FnMut&lt;()&gt;&gt;::call_mut — 1 samples (0.0%)</title><rect class="frame" x="2162.043" y="395" width="0.346" height="24" fill="rgb(229,152,109)"/>
+</g>
+<g><title>&lt;std::io::stdio::StdoutLock as std::io::Write&gt;::flush — 1 samples (0.0%)</title><rect class="frame" x="2162.389" y="395" width="0.346" height="24" fill="rgb(243,202,101)"/>
+</g>
+<g><title>main — 1 samples (0.0%)</title><rect class="frame" x="2169.654" y="420" width="0.346" height="24" fill="rgb(238,120,129)"/>
+</g>
+<g><title>std::rt::lang_start_internal — 1 samples (0.0%)</title><rect class="frame" x="2169.654" y="395" width="0.346" height="24" fill="rgb(230,169,125)"/>
+</g>
+<g><title>std::rt::lang_start::&lt;core::result::Result&lt;(), core::io::error::Error&gt;&gt;::{closure#0} — 1 samples (0.0%)</title><rect class="frame" x="2169.654" y="370" width="0.346" height="24" fill="rgb(245,187,109)"/>
+</g>
+<g><title>std::sys::backtrace::__rust_begin_short_backtrace::&lt;fn() -&gt; core::result::Result&lt;(), core::io::error::Error&gt;, core::result::Result&lt;(), core::io::error::Error&gt;&gt; — 1 samples (0.0%)</title><rect class="frame" x="2169.654" y="345" width="0.346" height="24" fill="rgb(239,165,94)"/>
+</g>
+<g><title>&lt;kilo_rs::editor::Editor&gt;::process_keypress — 1 samples (0.0%)</title><rect class="frame" x="2169.654" y="320" width="0.346" height="24" fill="rgb(239,204,80)"/>
+</g>
+</svg>

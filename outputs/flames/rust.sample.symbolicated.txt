@@ -1,0 +1,467 @@
+Analysis of sampling kilo-rs (pid 35581) every 1 millisecond
+Process:         kilo-rs [35581]
+Path:            /Users/USER/*/kilo-rs
+Load Address:    0x102708000
+Identifier:      kilo-rs
+Version:         0
+Code Type:       ARM64
+Platform:        macOS
+Parent Process:  Python [35560]
+Target Type:     live task
+
+Date/Time:       2026-11-15 21:53:29.925 +0530
+Launch Time:     2026-11-15 21:53:29.871 +0530
+OS Version:      macOS 15.5 (24F74)
+Report Version:  7
+Analysis Tool:   /usr/bin/sample
+
+Physical footprint:         1600K
+Physical footprint (peak):  1600K
+Idle exit:                  untracked
+----
+
+Call graph:
+    6186 Thread_3929264   DispatchQueue_1: com.apple.main-thread  (serial)
+      6186 start  (in dyld) + 6076  [0x19b896b98]
+        6186 main  (in kilo-rs) + 52  [0x10270efec]
+          6186 _RNvNtCs7mRY9FNn263_3std2rt19lang_start_internal  (in kilo-rs) + 952  [0x1027294fc]  rt.rs:171
+            6186 _RNCINvNtCs7mRY9FNn263_3std2rt10lang_startINtNtCslWxY2MhVcag_4core6result6ResultuNtNtNtBI_2io5error5ErrorEE0Cs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 24  [0x10270e1b0]  rt.rs:206
+              6186 _RINvNtNtCs7mRY9FNn263_3std3sys9backtrace28___rust_begin_short_backtraceFEINtNtCslWxY2MhVcag_4core6result6ResultuNtNtNtB1e_2io5error5ErrorEB19_ECs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 12  [0x10270e190]  backtrace.rs:166
+                5716 _RNvCs5my03N4gFHs_7kilo_rs4main  (in kilo-rs) + 616  [0x10270e55c]  main.rs:52
+                + 3584 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3424  [0x102709bd8]  editor.rs:334
+                + ! 3541 _RNvXsh_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_10StdoutLockNtB7_5Write9write_all  (in kilo-rs) + 280  [0x1027317e4]  stdio.rs:861
+                + ! : 3532 _RNvYNtNtNtNtCs7mRY9FNn263_3std3sys5stdio4unix6StdoutNtNtBa_2io5Write9write_allBa_  (in kilo-rs) + 108  [0x1027337d8]  mod.rs:1613
+                + ! : | 3532 write  (in libsystem_kernel.dylib) + 8,4  [0x19bbf86f4,0x19bbf86f0]
+                + ! : 4 _RNvYNtNtNtNtCs7mRY9FNn263_3std3sys5stdio4unix6StdoutNtNtBa_2io5Write9write_allBa_  (in kilo-rs) + 108  [0x1027337d8]  mod.rs:1613
+                + ! : 3 write  (in libsystem_kernel.dylib) + 40  [0x19bbf8714]
+                + ! : 1 _RNvYNtNtNtNtCs7mRY9FNn263_3std3sys5stdio4unix6StdoutNtNtBa_2io5Write9write_allBa_  (in kilo-rs) + 24  [0x102733784]  mod.rs:1611
+                + ! : 1 _RNvYNtNtNtNtCs7mRY9FNn263_3std3sys5stdio4unix6StdoutNtNtBa_2io5Write9write_allBa_  (in kilo-rs) + 84  [0x1027337c0]  mod.rs:1612
+                + ! 24 _RNvXsh_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_10StdoutLockNtB7_5Write9write_all  (in kilo-rs) + 280,204,...  [0x1027317e4,0x102731798,...]  stdio.rs:861
+                + ! 11 _RNvXsh_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_10StdoutLockNtB7_5Write9write_all  (in kilo-rs) + 56  [0x102731704]  stdio.rs:861
+                + ! : 4 _RNvNtNtCslWxY2MhVcag_4core5slice6memchr7memrchr  (in kilo-rs) + 116  [0x10273f7f0]  memchr.rs:0
+                + ! : 4 _RNvNtNtCslWxY2MhVcag_4core5slice6memchr7memrchr  (in kilo-rs) + 80,88  [0x10273f7cc,0x10273f7d4]  memchr.rs:132
+                + ! : 2 _RNvNtNtCslWxY2MhVcag_4core5slice6memchr7memrchr  (in kilo-rs) + 212,220  [0x10273f850,0x10273f858]  memchr.rs:160
+                + ! : 1 _RNvNtNtCslWxY2MhVcag_4core5slice6memchr7memrchr  (in kilo-rs) + 180  [0x10273f830]  memchr.rs:151
+                + ! 8 _RNvXsh_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_10StdoutLockNtB7_5Write9write_all  (in kilo-rs) + 224  [0x1027317ac]  stdio.rs:861
+                + !   4 DYLD-STUB$$memcpy  (in kilo-rs) + 0  [0x1027469b8]
+                + !   4 _platform_memmove  (in libsystem_platform.dylib) + 0,420  [0x19bc70250,0x19bc703f4]
+                + 975 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 900,376,...  [0x1027091fc,0x102708ff0,...]  editor.rs:332
+                + 581 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3436  [0x102709be4]  editor.rs:335
+                + ! 572 _RNvXsh_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_10StdoutLockNtB7_5Write5flush  (in kilo-rs) + 40  [0x102731698]  stdio.rs:858
+                + ! : 562 _RNvMs_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufwriterINtB4_9BufWriterNtNtB8_5stdio9StdoutRawE9flush_bufBa_  (in kilo-rs) + 108  [0x102725eac]  bufwriter.rs:249
+                + ! : | 562 write  (in libsystem_kernel.dylib) + 8,4  [0x19bbf86f4,0x19bbf86f0]
+                + ! : 5 _RNvMs_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufwriterINtB4_9BufWriterNtNtB8_5stdio9StdoutRawE9flush_bufBa_  (in kilo-rs) + 264  [0x102725f48]  bufwriter.rs:265
+                + ! : | 5 _platform_memmove  (in libsystem_platform.dylib) + 0,460,...  [0x19bc70250,0x19bc7041c,...]
+                + ! : 2 _RNvMs_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufwriterINtB4_9BufWriterNtNtB8_5stdio9StdoutRawE9flush_bufBa_  (in kilo-rs) + 108  [0x102725eac]  bufwriter.rs:249
+                + ! : 1 _RNvMs_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufwriterINtB4_9BufWriterNtNtB8_5stdio9StdoutRawE9flush_bufBa_  (in kilo-rs) + 0  [0x102725e40]  bufwriter.rs:195
+                + ! : 1 _RNvMs_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufwriterINtB4_9BufWriterNtNtB8_5stdio9StdoutRawE9flush_bufBa_  (in kilo-rs) + 72  [0x102725e88]  bufwriter.rs:247
+                + ! : 1 _RNvMs_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufwriterINtB4_9BufWriterNtNtB8_5stdio9StdoutRawE9flush_bufBa_  (in kilo-rs) + 212  [0x102725f14]  bufwriter.rs:252
+                + ! 7 _RNvXsh_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_10StdoutLockNtB7_5Write5flush  (in kilo-rs) + 40  [0x102731698]  stdio.rs:858
+                + ! 2 _RNvMs_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufwriterINtB4_9BufWriterNtNtB8_5stdio9StdoutRawE9flush_bufBa_  (in kilo-rs) + 316,320  [0x102725f7c,0x102725f80]  bufwriter.rs:265
+                + 315 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 556  [0x1027090a4]  editor.rs:332
+                + ! 289 _RNvYINtNtCs6KVRSXc8uZF_5alloc3vec3VechENtNtCs7mRY9FNn263_3std2io5Write9write_fmtCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 44  [0x10270dbc4]  mod.rs:1730
+                + ! : 108 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 96  [0x10273e574]  mod.rs:1687
+                + ! : | 74 _RNvXNtNtNtCslWxY2MhVcag_4core3fmt3num3imphNtB6_7Display3fmt  (in kilo-rs) + 164  [0x10273fe48]  num.rs:143
+                + ! : | + 25 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 76  [0x10273cea0]  mod.rs:1830
+                + ! : | + 16 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 64  [0x10270d7f4]  mod.rs:615
+                + ! : | + ! 13 _platform_memmove  (in libsystem_platform.dylib) + 452,436,...  [0x19bc70414,0x19bc70404,...]
+                + ! : | + ! 3 DYLD-STUB$$memcpy  (in kilo-rs) + 4  [0x1027469bc]
+                + ! : | + 15 _RNvNvMsa_NtCslWxY2MhVcag_4core3fmtNtB7_9Formatter12pad_integral12write_prefix  (in kilo-rs) + 116,120  [0x10273fd98,0x10273fd9c]  mod.rs:1852
+                + ! : | + 8 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 20,0  [0x10273ce68,0x10273ce54]  mod.rs:1826
+                + ! : | + 6 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 140  [0x10273cee0]  mod.rs:1858
+                + ! : | + ! 4 _RNvNvMsa_NtCslWxY2MhVcag_4core3fmtNtB7_9Formatter12pad_integral12write_prefix  (in kilo-rs) + 32  [0x10273fd44]  mod.rs:1848
+                + ! : | + ! 2 _RNvNvMsa_NtCslWxY2MhVcag_4core3fmtNtB7_9Formatter12pad_integral12write_prefix  (in kilo-rs) + 12  [0x10273fd30]  mod.rs:1847
+                + ! : | + 2 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 28  [0x10270d7d0]  mod.rs:615
+                + ! : | + 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 100  [0x10273ceb8]  mod.rs:1855
+                + ! : | + 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 144  [0x10273cee4]  mod.rs:1859
+                + ! : | 20 _RNvXNtNtNtCslWxY2MhVcag_4core3fmt3num3imphNtB6_7Display3fmt  (in kilo-rs) + 76,12,...  [0x10273fdf0,0x10273fdb0,...]  num.rs:143
+                + ! : | 6 _RNvXNtNtNtCslWxY2MhVcag_4core3fmt3num3imphNtB6_7Display3fmt  (in kilo-rs) + 164  [0x10273fe48]  num.rs:151
+                + ! : | 5 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 180  [0x10273cf08]  mod.rs:1859
+                + ! : | 3 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 84  [0x10270d808]  mod.rs:622
+                + ! : 82 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 144  [0x10273e5a4]  mod.rs:1665
+                + ! : | 65 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 64  [0x10270d7f4]  mod.rs:615
+                + ! : | + 55 _platform_memmove  (in libsystem_platform.dylib) + 428,452,...  [0x19bc703fc,0x19bc70414,...]
+                + ! : | + 10 DYLD-STUB$$memcpy  (in kilo-rs) + 4  [0x1027469bc]
+                + ! : | 15 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 28,44  [0x10270d7d0,0x10270d7e0]  mod.rs:615
+                + ! : | 2 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 0  [0x10270d7b4]  mod.rs:614
+                + ! : 24 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 104,44  [0x10273e57c,0x10273e540]  mod.rs:1648
+                + ! : 18 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 20,36,...  [0x10273e528,0x10273e538,...]  mod.rs:1631
+                + ! : 17 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 84,80  [0x10270d808,0x10270d804]  mod.rs:622
+                + ! : 13 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 156  [0x10273e5b0]  mod.rs:1666
+                + ! : 8 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 116  [0x10273e588]  mod.rs:1649
+                + ! : 8 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 84  [0x10273e568]  mod.rs:1687
+                + ! : 7 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 124  [0x10273e590]  mod.rs:1661
+                + ! : 2 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 144  [0x10273e5a4]  mod.rs:1665
+                + ! : 1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 396  [0x10273e6a0]  mod.rs:0
+                + ! : 1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 408  [0x10273e6ac]  mod.rs:1740
+                + ! 14 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 424  [0x10273e6bc]  mod.rs:1740
+                + ! 11 _RNvYINtNtCs6KVRSXc8uZF_5alloc3vec3VechENtNtCs7mRY9FNn263_3std2io5Write9write_fmtCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 48,88,...  [0x10270dbc8,0x10270dbf0,...]  mod.rs:1730
+                + ! 1 _RNvYINtNtCs6KVRSXc8uZF_5alloc3vec3VechENtNtCs7mRY9FNn263_3std2io5Write9write_fmtCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 0  [0x10270db98]  mod.rs:1726
+                + 86 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2380  [0x1027097c4]  editor.rs:332
+                + ! 78 _RNvNvNtCs6KVRSXc8uZF_5alloc3fmt6format12format_inner  (in kilo-rs) + 308  [0x10273c1d4]  fmt.rs:654
+                + ! : 33 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 324  [0x10273e658]  mod.rs:1735
+                + ! : | 16 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 112  [0x10273c494]  string.rs:3372
+                + ! : | + 16 _RINvNvMs2_NtCs6KVRSXc8uZF_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalEBa_  (in kilo-rs) + 68  [0x1027461bc]  mod.rs:669
+                + ! : | +   12 _RNvMs5_NtCs6KVRSXc8uZF_5alloc7raw_vecNtB5_11RawVecInner11finish_growB7_  (in kilo-rs) + 88  [0x1027462a8]  mod.rs:560
+                + ! : | +   ! 7 szone_malloc_should_clear  (in libsystem_malloc.dylib) + 84  [0x19ba37be8]
+                + ! : | +   ! : 5 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 272  [0x19ba38dc4]
+                + ! : | +   ! : | 3 tiny_malloc_from_free_list  (in libsystem_malloc.dylib) + 1372  [0x19ba39a80]
+                + ! : | +   ! : | + 3 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 92,0  [0x19ba3c398,0x19ba3c33c]
+                + ! : | +   ! : | 2 tiny_malloc_from_free_list  (in libsystem_malloc.dylib) + 160,1348  [0x19ba395c4,0x19ba39a68]
+                + ! : | +   ! : 2 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 292  [0x19ba38dd8]
+                + ! : | +   ! 3 _malloc_zone_malloc  (in libsystem_malloc.dylib) + 12,44  [0x19ba68ff8,0x19ba69018]
+                + ! : | +   ! 1 DYLD-STUB$$malloc  (in kilo-rs) + 4  [0x1027469a4]
+                + ! : | +   ! 1 szone_malloc_should_clear  (in libsystem_malloc.dylib) + 276  [0x19ba37ca8]
+                + ! : | +   2 _RNvCs6rREvFdRhLb_7___rustc12___rust_alloc  (in kilo-rs) + 12  [0x10270f004]
+                + ! : | +   1 _RNvMs5_NtCs6KVRSXc8uZF_5alloc7raw_vecNtB5_11RawVecInner11finish_growB7_  (in kilo-rs) + 76  [0x10274629c]  mod.rs:560
+                + ! : | +   ! 1 _RNvCs6rREvFdRhLb_7___rustc35___rust_no_alloc_shim_is_unstable_v2  (in kilo-rs) + 8  [0x10270f040]
+                + ! : | +   1 szone_malloc_should_clear  (in libsystem_malloc.dylib) + 364  [0x19ba37d00]
+                + ! : | 13 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter3pad  (in kilo-rs) + 112,132,...  [0x10273d784,0x10273d798,...]  mod.rs:1920
+                + ! : | 2 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 48,64  [0x10273c454,0x10273c464]  string.rs:3372
+                + ! : | 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter3pad  (in kilo-rs) + 16  [0x10273d724]  mod.rs:1910
+                + ! : | 1 _RNvXsi_NtCslWxY2MhVcag_4core3fmteNtB5_7Display3fmt  (in kilo-rs) + 0  [0x102741aa8]  mod.rs:2966
+                + ! : 28 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 144  [0x10273e5a4]  mod.rs:1665
+                + ! : | 22 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 112  [0x10273c494]  string.rs:3372
+                + ! : | + 21 _RINvNvMs2_NtCs6KVRSXc8uZF_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalEBa_  (in kilo-rs) + 68  [0x1027461bc]  mod.rs:669
+                + ! : | + ! 19 _RNvMs5_NtCs6KVRSXc8uZF_5alloc7raw_vecNtB5_11RawVecInner11finish_growB7_  (in kilo-rs) + 44  [0x10274627c]  mod.rs:557
+                + ! : | + ! : 15 _realloc  (in libsystem_malloc.dylib) + 452  [0x19ba69e58]
+                + ! : | + ! : | 14 _malloc_zone_realloc  (in libsystem_malloc.dylib) + 148  [0x19ba69628]
+                + ! : | + ! : | + 9 szone_realloc  (in libsystem_malloc.dylib) + 308  [0x19ba3ac84]
+                + ! : | + ! : | + ! 5 tiny_try_realloc_in_place  (in libsystem_malloc.dylib) + 56,1368,...  [0x19ba3b00c,0x19ba3b52c,...]
+                + ! : | + ! : | + ! 2 tiny_try_realloc_in_place  (in libsystem_malloc.dylib) + 1220  [0x19ba3b498]
+                + ! : | + ! : | + ! : 2 tiny_free_list_remove_ptr  (in libsystem_malloc.dylib) + 64,264  [0x19ba3c5d0,0x19ba3c698]
+                + ! : | + ! : | + ! 2 tiny_try_realloc_in_place  (in libsystem_malloc.dylib) + 1404  [0x19ba3b550]
+                + ! : | + ! : | + !   2 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 116,124  [0x19ba3c3b0,0x19ba3c3b8]
+                + ! : | + ! : | + 3 szone_realloc  (in libsystem_malloc.dylib) + 68  [0x19ba3ab94]
+                + ! : | + ! : | + ! 3 szone_size  (in libsystem_malloc.dylib) + 68  [0x19ba39f44]
+                + ! : | + ! : | + !   3 tiny_size  (in libsystem_malloc.dylib) + 0,244,...  [0x19ba39fc4,0x19ba3a0b8,...]
+                + ! : | + ! : | + 1 szone_realloc  (in libsystem_malloc.dylib) + 924  [0x19ba3aeec]
+                + ! : | + ! : | + ! 1 szone_malloc_should_clear  (in libsystem_malloc.dylib) + 84  [0x19ba37be8]
+                + ! : | + ! : | + !   1 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 280  [0x19ba38dcc]
+                + ! : | + ! : | + 1 szone_realloc  (in libsystem_malloc.dylib) + 268  [0x19ba3ac5c]
+                + ! : | + ! : | 1 _malloc_zone_realloc  (in libsystem_malloc.dylib) + 184  [0x19ba6964c]
+                + ! : | + ! : 2 _realloc  (in libsystem_malloc.dylib) + 252  [0x19ba69d90]
+                + ! : | + ! : | 2 szone_size  (in libsystem_malloc.dylib) + 68  [0x19ba39f44]
+                + ! : | + ! : |   2 tiny_size  (in libsystem_malloc.dylib) + 20,112  [0x19ba39fd8,0x19ba3a034]
+                + ! : | + ! : 1 _realloc  (in libsystem_malloc.dylib) + 452  [0x19ba69e58]
+                + ! : | + ! : 1 szone_size  (in libsystem_malloc.dylib) + 44  [0x19ba39f2c]
+                + ! : | + ! 2 _RNvMs5_NtCs6KVRSXc8uZF_5alloc7raw_vecNtB5_11RawVecInner11finish_growB7_  (in kilo-rs) + 0,4  [0x102746250,0x102746254]  mod.rs:544
+                + ! : | + 1 _RINvNvMs2_NtCs6KVRSXc8uZF_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalEBa_  (in kilo-rs) + 80  [0x1027461c8]  mod.rs:669
+                + ! : | 5 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 64  [0x10273c464]  string.rs:3372
+                + ! : | + 4 _platform_memmove  (in libsystem_platform.dylib) + 444,0,...  [0x19bc7040c,0x19bc70250,...]
+                + ! : | + 1 DYLD-STUB$$memcpy  (in kilo-rs) + 0  [0x1027469b8]
+                + ! : | 1 _RINvNvMs2_NtCs6KVRSXc8uZF_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalEBa_  (in kilo-rs) + 92  [0x1027461d4]  mod.rs:672
+                + ! : 9 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 96  [0x10273e574]  mod.rs:1687
+                + ! : | 2 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter3pad  (in kilo-rs) + 36  [0x10273d738]  mod.rs:1912
+                + ! : | 2 _RNvXsd_NtNtNtCslWxY2MhVcag_4core3fmt3num3impyNtB9_7Display3fmt  (in kilo-rs) + 76  [0x102741650]  num.rs:143
+                + ! : | + 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 100  [0x10273ceb8]  mod.rs:1855
+                + ! : | + 1 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 64  [0x10273c464]  string.rs:3372
+                + ! : | +   1 _platform_memmove  (in libsystem_platform.dylib) + 444  [0x19bc7040c]
+                + ! : | 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 180  [0x10273cf08]  mod.rs:1859
+                + ! : | 1 _RNvXs1i_NtCslWxY2MhVcag_4core3fmtReNtB6_7Display3fmtCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 20  [0x10270d950]  mod.rs:2872
+                + ! : | 1 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 36  [0x10273c448]  string.rs:3372
+                + ! : | 1 _RNvXsd_NtNtNtCslWxY2MhVcag_4core3fmt3num3impyNtB9_7Display3fmt  (in kilo-rs) + 0  [0x102741604]  num.rs:135
+                + ! : | 1 _RNvXsd_NtNtNtCslWxY2MhVcag_4core3fmt3num3impyNtB9_7Display3fmt  (in kilo-rs) + 48  [0x102741634]  num.rs:143
+                + ! : |   1 _RNvMsf_NtNtNtCslWxY2MhVcag_4core3fmt3num3impy10__fmt_inner  (in kilo-rs) + 220  [0x10273db10]  num.rs:198
+                + ! : 3 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 156,164  [0x10273e5b0,0x10273e5b8]  mod.rs:1666
+                + ! : 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter3pad  (in kilo-rs) + 668  [0x10273d9b0]  mod.rs:0
+                + ! : 1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 104  [0x10273e57c]  mod.rs:1648
+                + ! : 1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 276  [0x10273e628]  mod.rs:1717
+                + ! : 1 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 84  [0x10273c478]  string.rs:3374
+                + ! : 1 _RNvXsd_NtNtNtCslWxY2MhVcag_4core3fmt3num3impyNtB9_7Display3fmt  (in kilo-rs) + 84  [0x102741658]  num.rs:151
+                + ! 5 _RNvNvNtCs6KVRSXc8uZF_5alloc3fmt6format12format_inner  (in kilo-rs) + 16,0  [0x10273c0b0,0x10273c0a0]  fmt.rs:650
+                + ! 3 _RNvNvNtCs6KVRSXc8uZF_5alloc3fmt6format12format_inner  (in kilo-rs) + 84,92,...  [0x10273c0f4,0x10273c0fc,...]  fmt.rs:651
+                + 39 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2436  [0x1027097fc]  editor.rs:332
+                + ! 31 _RNvNvNtCs6KVRSXc8uZF_5alloc3fmt6format12format_inner  (in kilo-rs) + 308  [0x10273c1d4]  fmt.rs:654
+                + ! : 28 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 96  [0x10273e574]  mod.rs:1687
+                + ! : | 23 _RNvXsd_NtNtNtCslWxY2MhVcag_4core3fmt3num3impyNtB9_7Display3fmt  (in kilo-rs) + 76  [0x102741650]  num.rs:143
+                + ! : | + 12 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 112  [0x10273c494]  string.rs:3372
+                + ! : | + ! 10 _RINvNvMs2_NtCs6KVRSXc8uZF_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalEBa_  (in kilo-rs) + 68  [0x1027461bc]  mod.rs:669
+                + ! : | + ! : 9 _RNvMs5_NtCs6KVRSXc8uZF_5alloc7raw_vecNtB5_11RawVecInner11finish_growB7_  (in kilo-rs) + 88  [0x1027462a8]  mod.rs:560
+                + ! : | + ! : | 7 szone_malloc_should_clear  (in libsystem_malloc.dylib) + 84  [0x19ba37be8]
+                + ! : | + ! : | + 4 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 272  [0x19ba38dc4]
+                + ! : | + ! : | + ! 2 tiny_malloc_from_free_list  (in libsystem_malloc.dylib) + 420  [0x19ba396c8]
+                + ! : | + ! : | + ! : 2 _tiny_check_and_zero_inline_meta_from_freelist  (in libsystem_malloc.dylib) + 120  [0x19ba6f72c]
+                + ! : | + ! : | + ! 1 _tiny_check_and_zero_inline_meta_from_freelist  (in libsystem_malloc.dylib) + 208  [0x19ba6f784]
+                + ! : | + ! : | + ! 1 tiny_malloc_from_free_list  (in libsystem_malloc.dylib) + 112  [0x19ba39594]
+                + ! : | + ! : | + 2 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 52  [0x19ba38ce8]
+                + ! : | + ! : | + ! 2 rack_get_thread_index  (in libsystem_malloc.dylib) + 20,40  [0x19ba527dc,0x19ba527f0]
+                + ! : | + ! : | + 1 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 292  [0x19ba38dd8]
+                + ! : | + ! : | 1 _RNvCs6rREvFdRhLb_7___rustc11___rdl_alloc  (in kilo-rs) + 0  [0x10271d708]  alloc.rs:450
+                + ! : | + ! : | 1 _malloc_zone_malloc  (in libsystem_malloc.dylib) + 44  [0x19ba69018]
+                + ! : | + ! : 1 _RNvMs5_NtCs6KVRSXc8uZF_5alloc7raw_vecNtB5_11RawVecInner11finish_growB7_  (in kilo-rs) + 4  [0x102746254]  mod.rs:544
+                + ! : | + ! 2 _RINvNvMs2_NtCs6KVRSXc8uZF_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalEBa_  (in kilo-rs) + 68  [0x1027461bc]  mod.rs:669
+                + ! : | + 8 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 64  [0x10273c464]  string.rs:3372
+                + ! : | + ! 7 _platform_memmove  (in libsystem_platform.dylib) + 452  [0x19bc70414]
+                + ! : | + ! 1 DYLD-STUB$$memcpy  (in kilo-rs) + 4  [0x1027469bc]
+                + ! : | + 2 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 28,48  [0x10273c440,0x10273c454]  string.rs:3372
+                + ! : | + 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 140  [0x10273cee0]  mod.rs:1858
+                + ! : | +   1 _RNvNvMsa_NtCslWxY2MhVcag_4core3fmtNtB7_9Formatter12pad_integral12write_prefix  (in kilo-rs) + 32  [0x10273fd44]  mod.rs:1848
+                + ! : | 3 _RNvXsd_NtNtNtCslWxY2MhVcag_4core3fmt3num3impyNtB9_7Display3fmt  (in kilo-rs) + 48  [0x102741634]  num.rs:143
+                + ! : | + 2 _RNvMsf_NtNtNtCslWxY2MhVcag_4core3fmt3num3impy10__fmt_inner  (in kilo-rs) + 84,128  [0x10273da88,0x10273dab4]  num.rs:213
+                + ! : | + 1 _RNvMsf_NtNtNtCslWxY2MhVcag_4core3fmt3num3impy10__fmt_inner  (in kilo-rs) + 204  [0x10273db00]  num.rs:216
+                + ! : | 2 _RNvMsf_NtNtNtCslWxY2MhVcag_4core3fmt3num3impy10__fmt_inner  (in kilo-rs) + 336  [0x10273db84]  num.rs:253
+                + ! : 1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 40  [0x10273e53c]  mod.rs:1632
+                + ! : 1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 144  [0x10273e5a4]  mod.rs:1665
+                + ! : | 1 _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs) + 0  [0x10273c424]  string.rs:3371
+                + ! : 1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 72  [0x10273e55c]  mod.rs:1685
+                + ! 5 _RNvNvNtCs6KVRSXc8uZF_5alloc3fmt6format12format_inner  (in kilo-rs) + 184,160  [0x10273c158,0x10273c140]  fmt.rs:651
+                + ! 1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 424  [0x10273e6bc]  mod.rs:1740
+                + ! 1 _RNvNvNtCs6KVRSXc8uZF_5alloc3fmt6format12format_inner  (in kilo-rs) + 16  [0x10273c0b0]  fmt.rs:650
+                + ! 1 _RNvNvNtCs6KVRSXc8uZF_5alloc3fmt6format12format_inner  (in kilo-rs) + 240  [0x10273c190]  fmt.rs:652
+                + 20 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3340  [0x102709b84]  editor.rs:332
+                + ! 20 _RNvYINtNtCs6KVRSXc8uZF_5alloc3vec3VechENtNtCs7mRY9FNn263_3std2io5Write9write_fmtCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 44  [0x10270dbc4]  mod.rs:1730
+                + !   10 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 96  [0x10273e574]  mod.rs:1687
+                + !   : 6 _RNvXsd_NtNtNtCslWxY2MhVcag_4core3fmt3num3impyNtB9_7Display3fmt  (in kilo-rs) + 76  [0x102741650]  num.rs:143
+                + !   : | 2 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 64  [0x10270d7f4]  mod.rs:615
+                + !   : | + 2 _platform_memmove  (in libsystem_platform.dylib) + 0,452  [0x19bc70250,0x19bc70414]
+                + !   : | 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 88  [0x10273ceac]  mod.rs:0
+                + !   : | 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 76  [0x10273cea0]  mod.rs:1830
+                + !   : | 1 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 140  [0x10273cee0]  mod.rs:1858
+                + !   : | + 1 _RNvNvMsa_NtCslWxY2MhVcag_4core3fmtNtB7_9Formatter12pad_integral12write_prefix  (in kilo-rs) + 32  [0x10273fd44]  mod.rs:1848
+                + !   : | 1 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 28  [0x10270d7d0]  mod.rs:615
+                + !   : 2 _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs) + 180  [0x10273cf08]  mod.rs:1859
+                + !   : 2 _RNvXsd_NtNtNtCslWxY2MhVcag_4core3fmt3num3impyNtB9_7Display3fmt  (in kilo-rs) + 48  [0x102741634]  num.rs:143
+                + !   :   2 _RNvMsf_NtNtNtCslWxY2MhVcag_4core3fmt3num3impy10__fmt_inner  (in kilo-rs) + 244  [0x10273db28]  num.rs:0
+                + !   7 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 144  [0x10273e5a4]  mod.rs:1665
+                + !   : 7 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 64  [0x10270d7f4]  mod.rs:615
+                + !   :   7 _platform_memmove  (in libsystem_platform.dylib) + 452,0,...  [0x19bc70414,0x19bc70250,...]
+                + !   1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 104  [0x10273e57c]  mod.rs:1648
+                + !   1 _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs) + 140  [0x10273e5a0]  mod.rs:1665
+                + !   1 _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 84  [0x10270d808]  mod.rs:622
+                + 19 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2884  [0x1027099bc]  editor.rs:332
+                + ! 17 _RNvMNtCs7mRY9FNn263_3std4timeNtB2_7Instant7elapsed  (in kilo-rs) + 28  [0x10271e008]  time.rs:389
+                + ! : 17 _RNvMNtNtNtNtCs7mRY9FNn263_3std3sys3pal4unix4timeNtB2_8Timespec3now  (in kilo-rs) + 24  [0x10271e154]  time.rs:107
+                + ! :   17 clock_gettime  (in libsystem_c.dylib) + 60  [0x19bad5790]
+                + ! :     11 clock_gettime_nsec_np  (in libsystem_c.dylib) + 384  [0x19bac8168]
+                + ! :     | 10 mach_absolute_time  (in libsystem_kernel.dylib) + 108,112  [0x19bbf50f0,0x19bbf50f4]
+                + ! :     | 1 DYLD-STUB$$mach_absolute_time  (in libsystem_c.dylib) + 12  [0x19bb40ec4]
+                + ! :     3 clock_gettime_nsec_np  (in libsystem_c.dylib) + 12,228  [0x19bac7ff4,0x19bac80cc]
+                + ! :     2 clock_gettime_nsec_np  (in libsystem_c.dylib) + 240  [0x19bac80d8]
+                + ! :     | 1 DYLD-STUB$$mach_timebase_info  (in libsystem_c.dylib) + 0  [0x19bb40f38]
+                + ! :     | 1 mach_timebase_info  (in libsystem_kernel.dylib) + 8  [0x19bbf4fbc]
+                + ! :     1 mach_timebase_info  (in libsystem_kernel.dylib) + 84  [0x19bbf5008]
+                + ! 1 _RNvMNtCs7mRY9FNn263_3std4timeNtB2_7Instant7elapsed  (in kilo-rs) + 8  [0x10271dff4]  time.rs:388
+                + ! 1 _RNvMNtCs7mRY9FNn263_3std4timeNtB2_7Instant7elapsed  (in kilo-rs) + 68  [0x10271e030]  time.rs:389
+                + !   1 _RNvMNtNtNtNtCs7mRY9FNn263_3std3sys3pal4unix4timeNtB2_8Timespec12sub_timespec  (in kilo-rs) + 188  [0x10271e114]  time.rs:143
+                + 15 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2760  [0x102709940]  editor.rs:332
+                + ! 8 free_tiny  (in libsystem_malloc.dylib) + 460  [0x19ba3b99c]
+                + ! : 3 tiny_free_no_lock  (in libsystem_malloc.dylib) + 472,868,...  [0x19ba3bcf4,0x19ba3be80,...]
+                + ! : 2 tiny_free_no_lock  (in libsystem_malloc.dylib) + 416  [0x19ba3bcbc]
+                + ! : | 2 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 0,92  [0x19ba3c33c,0x19ba3c398]
+                + ! : 1 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 568  [0x19ba3c574]
+                + ! : 1 tiny_free_no_lock  (in libsystem_malloc.dylib) + 792  [0x19ba3be34]
+                + ! : | 1 tiny_free_list_remove_ptr  (in libsystem_malloc.dylib) + 64  [0x19ba3c5d0]
+                + ! : 1 tiny_free_no_lock  (in libsystem_malloc.dylib) + 1012  [0x19ba3bf10]
+                + ! :   1 tiny_free_list_remove_ptr  (in libsystem_malloc.dylib) + 0  [0x19ba3c590]
+                + ! 2 _free  (in libsystem_malloc.dylib) + 0,44  [0x19ba69c14,0x19ba69c40]
+                + ! 2 _szone_free  (in libsystem_malloc.dylib) + 140,456  [0x19ba4f1b0,0x19ba4f2ec]
+                + ! 2 free_tiny  (in libsystem_malloc.dylib) + 0,292  [0x19ba3b7d0,0x19ba3b8f4]
+                + ! 1 free_tiny  (in libsystem_malloc.dylib) + 136  [0x19ba3b858]
+                + !   1 _platform_memset  (in libsystem_platform.dylib) + 180  [0x19bc70034]
+                + 14 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3424  [0x102709bd8]  editor.rs:334
+                + 13 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2740  [0x10270992c]  editor.rs:332
+                + ! 6 free_tiny  (in libsystem_malloc.dylib) + 460  [0x19ba3b99c]
+                + ! : 3 tiny_free_no_lock  (in libsystem_malloc.dylib) + 0,204,...  [0x19ba3bb1c,0x19ba3bbe8,...]
+                + ! : 1 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 568  [0x19ba3c574]
+                + ! : 1 tiny_free_no_lock  (in libsystem_malloc.dylib) + 140  [0x19ba3bba8]
+                + ! : | 1 get_tiny_previous_free_msize  (in libsystem_malloc.dylib) + 56  [0x19ba47d54]
+                + ! : 1 tiny_free_no_lock  (in libsystem_malloc.dylib) + 416  [0x19ba3bcbc]
+                + ! :   1 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 92  [0x19ba3c398]
+                + ! 2 _free  (in libsystem_malloc.dylib) + 76,108  [0x19ba69c60,0x19ba69c80]
+                + ! 2 free_tiny  (in libsystem_malloc.dylib) + 76,152  [0x19ba3b81c,0x19ba3b868]
+                + ! 1 _szone_free  (in libsystem_malloc.dylib) + 140  [0x19ba4f1b0]
+                + ! 1 free_tiny  (in libsystem_malloc.dylib) + 136  [0x19ba3b858]
+                + ! : 1 DYLD-STUB$$_platform_memset  (in libsystem_malloc.dylib) + 12  [0x19ba71974]
+                + ! 1 tiny_free_no_lock  (in libsystem_malloc.dylib) + 1640  [0x19ba3c184]
+                + 12 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 1812  [0x10270958c]  editor.rs:332
+                + ! 6 szone_malloc_should_clear  (in libsystem_malloc.dylib) + 84  [0x19ba37be8]
+                + ! : 3 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 52  [0x19ba38ce8]
+                + ! : | 3 rack_get_thread_index  (in libsystem_malloc.dylib) + 0,12,...  [0x19ba527c8,0x19ba527d4,...]
+                + ! : 2 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 272  [0x19ba38dc4]
+                + ! : | 1 _tiny_check_and_zero_inline_meta_from_freelist  (in libsystem_malloc.dylib) + 208  [0x19ba6f784]
+                + ! : | 1 tiny_malloc_from_free_list  (in libsystem_malloc.dylib) + 112  [0x19ba39594]
+                + ! : 1 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 80  [0x19ba38d04]
+                + ! 2 _RNvCs6rREvFdRhLb_7___rustc12___rust_alloc  (in kilo-rs) + 0  [0x10270eff8]
+                + ! 1 _RNvCs6rREvFdRhLb_7___rustc11___rdl_alloc  (in kilo-rs) + 0  [0x10271d708]  alloc.rs:450
+                + ! 1 _malloc_zone_malloc  (in libsystem_malloc.dylib) + 0  [0x19ba68fec]
+                + ! 1 szone_malloc_should_clear  (in libsystem_malloc.dylib) + 0  [0x19ba37b94]
+                + ! 1 szone_malloc_type_malloc  (in libsystem_malloc.dylib) + 0  [0x19ba5001c]
+                + 7 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2720  [0x102709918]  editor.rs:332
+                + ! 3 free_tiny  (in libsystem_malloc.dylib) + 460  [0x19ba3b99c]
+                + ! : 2 tiny_free_no_lock  (in libsystem_malloc.dylib) + 416  [0x19ba3bcbc]
+                + ! : | 2 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 92,460  [0x19ba3c398,0x19ba3c508]
+                + ! : 1 tiny_free_no_lock  (in libsystem_malloc.dylib) + 192  [0x19ba3bbdc]
+                + ! 3 free_tiny  (in libsystem_malloc.dylib) + 76,104,...  [0x19ba3b81c,0x19ba3b838,...]
+                + ! 1 _szone_free  (in libsystem_malloc.dylib) + 20  [0x19ba4f138]
+                + 6 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3272  [0x102709b40]  editor.rs:332
+                + ! 3 free_tiny  (in libsystem_malloc.dylib) + 460  [0x19ba3b99c]
+                + ! : 2 tiny_free_no_lock  (in libsystem_malloc.dylib) + 224,520  [0x19ba3bbfc,0x19ba3bd24]
+                + ! : 1 tiny_free_no_lock  (in libsystem_malloc.dylib) + 416  [0x19ba3bcbc]
+                + ! :   1 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 124  [0x19ba3c3b8]
+                + ! 2 free_tiny  (in libsystem_malloc.dylib) + 36,208  [0x19ba3b7f4,0x19ba3b8a0]
+                + ! 1 free_tiny  (in libsystem_malloc.dylib) + 136  [0x19ba3b858]
+                + !   1 _platform_memset  (in libsystem_platform.dylib) + 160  [0x19bc70020]
+                + 6 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3472  [0x102709c08]  editor.rs:336
+                + ! 5 _RNvMNtNtNtNtNtCs7mRY9FNn263_3std3sys3pal4unix4sync5mutexNtB2_5Mutex6unlock  (in kilo-rs) + 0  [0x10271e47c]  mutex.rs:96
+                + ! 1 pthread_mutex_unlock  (in libsystem_pthread.dylib) + 0  [0x19bc318a4]
+                + 5 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3408  [0x102709bc8]  editor.rs:333
+                + ! 3 _RNvMs9_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_6Stdout4lock  (in kilo-rs) + 148  [0x102723564]  stdio.rs:770
+                + ! : 3 pthread_mutex_lock  (in libsystem_pthread.dylib) + 0,112  [0x19bc31358,0x19bc313c8]
+                + ! 1 _RNvMs9_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_6Stdout4lock  (in kilo-rs) + 0  [0x1027234d0]  stdio.rs:766
+                + ! 1 _RNvMs9_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_6Stdout4lock  (in kilo-rs) + 32  [0x1027234f0]  stdio.rs:770
+                + !   1 _tlv_get_addr  (in libdyld.dylib) + 0  [0x19bc400f8]
+                + 4 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2264  [0x102709750]  editor.rs:332
+                + ! 4 _RNvNtNtCslWxY2MhVcag_4core3str8converts9from_utf8  (in kilo-rs) + 120,0  [0x10273f4a4,0x10273f42c]  converts.rs:91
+                + 4 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2932  [0x1027099ec]  editor.rs:332
+                + ! 4 szone_malloc_should_clear  (in libsystem_malloc.dylib) + 84  [0x19ba37be8]
+                + !   4 tiny_malloc_should_clear  (in libsystem_malloc.dylib) + 272  [0x19ba38dc4]
+                + !     2 tiny_malloc_from_free_list  (in libsystem_malloc.dylib) + 1196,1500  [0x19ba399d0,0x19ba39b00]
+                + !     1 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 568  [0x19ba3c574]
+                + !     1 tiny_malloc_from_free_list  (in libsystem_malloc.dylib) + 1372  [0x19ba39a80]
+                + !       1 tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 260  [0x19ba3c440]
+                + 4 _RNvYINtNtCs6KVRSXc8uZF_5alloc3vec3VechENtNtCs7mRY9FNn263_3std2io5Write9write_fmtCs5my03N4gFHs_7kilo_rs  (in kilo-rs) + 148  [0x10270dc2c]  mod.rs:1732
+                + 2 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3244  [0x102709b24]  editor.rs:332
+                + ! 2 _platform_memmove  (in libsystem_platform.dylib) + 420,452  [0x19bc703f4,0x19bc70414]
+                + 1 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2500  [0x10270983c]  editor.rs:332
+                + ! 1 _platform_memmove  (in libsystem_platform.dylib) + 428  [0x19bc703fc]
+                + 1 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 2636  [0x1027098c4]  editor.rs:332
+                + ! 1 _platform_memmove  (in libsystem_platform.dylib) + 460  [0x19bc7041c]
+                + 1 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3396  [0x102709bbc]  editor.rs:333
+                + ! 1 _RNvNtNtCs7mRY9FNn263_3std2io5stdio6stdout  (in kilo-rs) + 0  [0x10272a6fc]  stdio.rs:720
+                + 1 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs) + 3436  [0x102709be4]  editor.rs:336
+                + 1 _RNvXsh_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_10StdoutLockNtB7_5Write5flush  (in kilo-rs) + 56  [0x1027316a8]  stdio.rs:859
+                447 _RNvCs5my03N4gFHs_7kilo_rs4main  (in kilo-rs) + 548  [0x10270e518]  main.rs:48
+                + 418 _RNvNtCs5my03N4gFHs_7kilo_rs5input8read_key  (in kilo-rs) + 32  [0x10270d120]  input.rs:35
+                + ! 414 _RNvYNvNtCs5my03N4gFHs_7kilo_rs5input9read_byteINtNtNtCslWxY2MhVcag_4core3ops8function5FnMutuE8call_mutB6_  (in kilo-rs) + 52  [0x10270df80]  function.rs:166
+                + ! : 409 _RNvXs3_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_5StdinNtB7_4Read4read  (in kilo-rs) + 88  [0x102730688]  stdio.rs:448
+                + ! : | 408 _RNvXs3_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufreaderINtB5_9BufReaderNtNtB9_5stdio8StdinRawENtB9_4Read4readBb_  (in kilo-rs) + 204  [0x1027307dc]  bufreader.rs:347
+                + ! : | + 408 read  (in libsystem_kernel.dylib) + 8,4  [0x19bbf57dc,0x19bbf57d8]
+                + ! : | 1 _RNvXs3_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufreaderINtB5_9BufReaderNtNtB9_5stdio8StdinRawENtB9_4Read4readBb_  (in kilo-rs) + 164  [0x1027307b4]  mod.rs:0
+                + ! : 2 _RNvXs3_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufreaderINtB5_9BufReaderNtNtB9_5stdio8StdinRawENtB9_4Read4readBb_  (in kilo-rs) + 468  [0x1027308e4]  bufreader.rs:351
+                + ! : 1 _RNvXs3_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_5StdinNtB7_4Read4read  (in kilo-rs) + 120  [0x1027306a8]  stdio.rs:448
+                + ! : | 1 pthread_mutex_unlock  (in libsystem_pthread.dylib) + 104  [0x19bc3190c]
+                + ! : 1 _RNvXs3_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_5StdinNtB7_4Read4read  (in kilo-rs) + 52  [0x102730664]  stdio.rs:448
+                + ! : 1 pthread_mutex_lock  (in libsystem_pthread.dylib) + 136  [0x19bc313e0]
+                + ! 3 _RNvYNvNtCs5my03N4gFHs_7kilo_rs5input9read_byteINtNtNtCslWxY2MhVcag_4core3ops8function5FnMutuE8call_mutB6_  (in kilo-rs) + 32  [0x10270df6c]  function.rs:166
+                + ! : 3 _RNvNtNtCs7mRY9FNn263_3std2io5stdio5stdin  (in kilo-rs) + 12,0  [0x10272a6d0,0x10272a6c4]  stdio.rs:344
+                + ! 1 _RNvYNvNtCs5my03N4gFHs_7kilo_rs5input9read_byteINtNtNtCslWxY2MhVcag_4core3ops8function5FnMutuE8call_mutB6_  (in kilo-rs) + 260  [0x10270e050]  function.rs:166
+                + 15 _RNvNtCs5my03N4gFHs_7kilo_rs5input8read_key  (in kilo-rs) + 336,240,...  [0x10270d250,0x10270d1f0,...]  input.rs:35
+                + 7 _RNvNtCs5my03N4gFHs_7kilo_rs5input8read_key  (in kilo-rs) + 240  [0x10270d1f0]  input.rs:35
+                + ! 3 _RNvYNvNtCs5my03N4gFHs_7kilo_rs5input9read_byteINtNtNtCslWxY2MhVcag_4core3ops8function5FnMutuE8call_mutB6_  (in kilo-rs) + 32  [0x10270df6c]  function.rs:166
+                + ! : 2 _RNvNtNtCs7mRY9FNn263_3std2io5stdio5stdin  (in kilo-rs) + 0,12  [0x10272a6c4,0x10272a6d0]  stdio.rs:344
+                + ! : 1 _RNvNtNtCs7mRY9FNn263_3std2io5stdio5stdin  (in kilo-rs) + 16  [0x10272a6d4]  stdio.rs:348
+                + ! 3 _RNvYNvNtCs5my03N4gFHs_7kilo_rs5input9read_byteINtNtNtCslWxY2MhVcag_4core3ops8function5FnMutuE8call_mutB6_  (in kilo-rs) + 52  [0x10270df80]  function.rs:166
+                + ! : 2 _RNvXs3_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_5StdinNtB7_4Read4read  (in kilo-rs) + 88  [0x102730688]  stdio.rs:448
+                + ! : 1 _RNvXs3_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_5StdinNtB7_4Read4read  (in kilo-rs) + 120  [0x1027306a8]  stdio.rs:448
+                + ! :   1 pthread_mutex_unlock  (in libsystem_pthread.dylib) + 72  [0x19bc318ec]
+                + ! 1 _RNvYNvNtCs5my03N4gFHs_7kilo_rs5input9read_byteINtNtNtCslWxY2MhVcag_4core3ops8function5FnMutuE8call_mutB6_  (in kilo-rs) + 260  [0x10270e050]  function.rs:166
+                + 6 _RNvNtCs5my03N4gFHs_7kilo_rs5input8read_key  (in kilo-rs) + 336  [0x10270d250]  input.rs:35
+                + ! 5 _RNvYNvNtCs5my03N4gFHs_7kilo_rs5input9read_byteINtNtNtCslWxY2MhVcag_4core3ops8function5FnMutuE8call_mutB6_  (in kilo-rs) + 52  [0x10270df80]  function.rs:166
+                + ! : 2 _RNvXs3_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_5StdinNtB7_4Read4read  (in kilo-rs) + 52,100  [0x102730664,0x102730694]  stdio.rs:448
+                + ! : 1 _RNvXs3_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_5StdinNtB7_4Read4read  (in kilo-rs) + 44  [0x10273065c]  stdio.rs:448
+                + ! : | 1 DYLD-STUB$$pthread_mutex_lock  (in kilo-rs) + 4  [0x102746a64]
+                + ! : 1 _RNvXs3_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_5StdinNtB7_4Read4read  (in kilo-rs) + 120  [0x1027306a8]  stdio.rs:448
+                + ! : | 1 DYLD-STUB$$pthread_mutex_unlock  (in kilo-rs) + 4  [0x102746a7c]
+                + ! : 1 _RNvXs3_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufreaderINtB5_9BufReaderNtNtB9_5stdio8StdinRawENtB9_4Read4readBb_  (in kilo-rs) + 468  [0x1027308e4]  bufreader.rs:351
+                + ! 1 _RNvYNvNtCs5my03N4gFHs_7kilo_rs5input9read_byteINtNtNtCslWxY2MhVcag_4core3ops8function5FnMutuE8call_mutB6_  (in kilo-rs) + 8  [0x10270df54]  function.rs:166
+                + 1 _RNvYNvNtCs5my03N4gFHs_7kilo_rs5input9read_byteINtNtNtCslWxY2MhVcag_4core3ops8function5FnMutuE8call_mutB6_  (in kilo-rs) + 268  [0x10270e058]  function.rs:166
+                18 _RNvCs5my03N4gFHs_7kilo_rs4main  (in kilo-rs) + 616  [0x10270e55c]  main.rs:52
+                2 _RNvCs5my03N4gFHs_7kilo_rs4main  (in kilo-rs) + 500,504  [0x10270e4e8,0x10270e4ec]  main.rs:44
+                2 _RNvCs5my03N4gFHs_7kilo_rs4main  (in kilo-rs) + 588  [0x10270e540]  main.rs:49
+                + 1 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor16process_keypress  (in kilo-rs) + 52  [0x102709e70]  editor.rs:618
+                + 1 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor16process_keypress  (in kilo-rs) + 68  [0x102709e80]  editor.rs:671
+                1 _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor16process_keypress  (in kilo-rs) + 1196  [0x10270a2e8]  editor.rs:681
+
+Total number in stack (recursive counted multiple, when >=5):
+        12       _platform_memmove  (in libsystem_platform.dylib) + 0  [0x19bc70250]
+        10       tiny_free_list_add_ptr  (in libsystem_malloc.dylib) + 0  [0x19ba3c33c]
+        5       DYLD-STUB$$memcpy  (in kilo-rs) + 0  [0x1027469b8]
+        5       szone_malloc_should_clear  (in libsystem_malloc.dylib) + 84  [0x19ba37be8]
+        5       tiny_free_no_lock  (in libsystem_malloc.dylib) + 0  [0x19ba3bb1c]
+
+Sort by top of stack, same collapsed (when >= 5):
+        write  (in libsystem_kernel.dylib)        4097
+        _RNvMNtCs5my03N4gFHs_7kilo_rs6editorNtB2_6Editor14refresh_screen  (in kilo-rs)        990
+        read  (in libsystem_kernel.dylib)        408
+        _RNvNtCslWxY2MhVcag_4core3fmt5write  (in kilo-rs)        106
+        _platform_memmove  (in libsystem_platform.dylib)        102
+        _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter12pad_integral  (in kilo-rs)        46
+        _RNvXNvNtCs7mRY9FNn263_3std2io17default_write_fmtINtB2_7AdapterINtNtCs6KVRSXc8uZF_5alloc3vec3VechEENtNtCslWxY2MhVcag_4core3fmt5Write9write_strCs5my03N4gFHs_7kilo_rs  (in kilo-rs)        41
+        _RNvXNtNtNtCslWxY2MhVcag_4core3fmt3num3imphNtB6_7Display3fmt  (in kilo-rs)        26
+        _RNvXsh_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_10StdoutLockNtB7_5Write9write_all  (in kilo-rs)        24
+        _RNvNvMsa_NtCslWxY2MhVcag_4core3fmtNtB7_9Formatter12pad_integral12write_prefix  (in kilo-rs)        23
+        _RNvCs5my03N4gFHs_7kilo_rs4main  (in kilo-rs)        20
+        DYLD-STUB$$memcpy  (in kilo-rs)        19
+        _RNvMsa_NtCslWxY2MhVcag_4core3fmtNtB5_9Formatter3pad  (in kilo-rs)        17
+        _RNvYINtNtCs6KVRSXc8uZF_5alloc3vec3VechENtNtCs7mRY9FNn263_3std2io5Write9write_fmtCs5my03N4gFHs_7kilo_rs  (in kilo-rs)        16
+        _RNvNtCs5my03N4gFHs_7kilo_rs5input8read_key  (in kilo-rs)        15
+        _RNvNvNtCs6KVRSXc8uZF_5alloc3fmt6format12format_inner  (in kilo-rs)        15
+        tiny_free_list_add_ptr  (in libsystem_malloc.dylib)        15
+        _RNvNtNtCslWxY2MhVcag_4core5slice6memchr7memrchr  (in kilo-rs)        11
+        mach_absolute_time  (in libsystem_kernel.dylib)        10
+        tiny_free_no_lock  (in libsystem_malloc.dylib)        10
+        free_tiny  (in libsystem_malloc.dylib)        9
+        _RNvMsf_NtNtNtCslWxY2MhVcag_4core3fmt3num3impy10__fmt_inner  (in kilo-rs)        8
+        _RNvXsh_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_10StdoutLockNtB7_5Write5flush  (in kilo-rs)        8
+        _RNvMs_NtNtNtCs7mRY9FNn263_3std2io8buffered9bufwriterINtB4_9BufWriterNtNtB8_5stdio9StdoutRawE9flush_bufBa_  (in kilo-rs)        7
+        _RNvXsZ_NtCs6KVRSXc8uZF_5alloc6stringNtB5_6StringNtNtCslWxY2MhVcag_4core3fmt5Write9write_str  (in kilo-rs)        7
+        _RNvNtNtCs7mRY9FNn263_3std2io5stdio5stdin  (in kilo-rs)        6
+        _RNvYNtNtNtNtCs7mRY9FNn263_3std3sys5stdio4unix6StdoutNtNtBa_2io5Write9write_allBa_  (in kilo-rs)        6
+        tiny_malloc_from_free_list  (in libsystem_malloc.dylib)        6
+        _RNvMNtNtNtNtNtCs7mRY9FNn263_3std3sys3pal4unix4sync5mutexNtB2_5Mutex6unlock  (in kilo-rs)        5
+        _RNvXs3_NtNtCs7mRY9FNn263_3std2io5stdioNtB5_5StdinNtB7_4Read4read  (in kilo-rs)        5
+        _malloc_zone_malloc  (in libsystem_malloc.dylib)        5
+        rack_get_thread_index  (in libsystem_malloc.dylib)        5
+        tiny_malloc_should_clear  (in libsystem_malloc.dylib)        5
+        tiny_size  (in libsystem_malloc.dylib)        5
+        tiny_try_realloc_in_place  (in libsystem_malloc.dylib)        5
+
+Binary Images:
+       0x102708000 -        0x10275737b +kilo-rs (0) <35705177-9721-3925-8B53-9B71C5D33EBB> /Users/*/kilo-rs
+       0x19b83c000 -        0x19b88f893  libobjc.A.dylib (940.4) <4966864D-C147-33D3-BB18-1E3979590B6D> /usr/lib/libobjc.A.dylib
+       0x19b890000 -        0x19b92b4cf  dyld (1.0.0 - 1285.19) <9CF0401A-A938-389E-A77D-9E9608076CCF> /usr/lib/dyld
+       0x19b92c000 -        0x19b92f168  libsystem_blocks.dylib (96) <4740F383-F4C0-328E-8753-41E8982EC94A> /usr/lib/system/libsystem_blocks.dylib
+       0x19b930000 -        0x19b97a8ff  libxpc.dylib (2894.121.3) <3B8AE373-80D2-36A4-A628-0CF6CF083703> /usr/lib/system/libxpc.dylib
+       0x19b97b000 -        0x19b9967ff  libsystem_trace.dylib (1643.120.5) <C8ED43C4-C077-34E9-AB26-F34231C895BE> /usr/lib/system/libsystem_trace.dylib
+       0x19b997000 -        0x19ba354b7  libcorecrypto.dylib (1736.120.5) <7EFCF3FE-36A2-3423-BA6A-CD23D0697006> /usr/lib/system/libcorecrypto.dylib
+       0x19ba36000 -        0x19ba7cfef  libsystem_malloc.dylib (715.120.13) <E2C4CBE4-6195-3328-B87C-2DFA4A6AD039> /usr/lib/system/libsystem_malloc.dylib
+       0x19ba7d000 -        0x19bac373f  libdispatch.dylib (1521.120.4) <8BF83CDA-8DB1-3D46-94B0-D811BD77E078> /usr/lib/system/libdispatch.dylib
+       0x19bac4000 -        0x19bac6d1b  libsystem_featureflags.dylib (97) <05344457-BD89-3B9D-89E2-5A6B3DE3F8B0> /usr/lib/system/libsystem_featureflags.dylib
+       0x19bac7000 -        0x19bb4846f  libsystem_c.dylib (1698.100.8) <F4529D5E-24F3-3BBB-BD3C-984856875FC8> /usr/lib/system/libsystem_c.dylib
+       0x19bb49000 -        0x19bbd5ff7  libc++.1.dylib (1900.180) <875203A1-087B-33A6-93A5-928BB7E9114C> /usr/lib/libc++.1.dylib
+       0x19bbd6000 -        0x19bbf3fff  libc++abi.dylib (1900.180) <4DB4AC5C-E091-3A2E-A149-B7955B8AF852> /usr/lib/libc++abi.dylib
+       0x19bbf4000 -        0x19bc2f653  libsystem_kernel.dylib (11417.121.6) <60485B6F-67E5-38C1-AEC9-EFD6031FF166> /usr/lib/system/libsystem_kernel.dylib
+       0x19bc30000 -        0x19bc3ca47  libsystem_pthread.dylib (536) <647B91FC-96D3-3BBB-AF08-970DF45257C8> /usr/lib/system/libsystem_pthread.dylib
+       0x19bc3d000 -        0x19bc6cba3  libdyld.dylib (1285.19) <C62596FE-63C5-3502-BBD1-14147A7CA921> /usr/lib/system/libdyld.dylib
+       0x19bc6d000 -        0x19bc74b4f  libsystem_platform.dylib (349) <519F3220-7499-334A-96D6-CCF3DC28F986> /usr/lib/system/libsystem_platform.dylib
+       0x19bc75000 -        0x19bca46f7  libsystem_info.dylib (597) <33D79A98-6726-3AE0-8D55-4EDD853ABC71> /usr/lib/system/libsystem_info.dylib
+       0x19f73e000 -        0x19f748387  libsystem_darwin.dylib (1698.100.8) <106CE5FD-0965-3702-ADE3-B5641ACE0234> /usr/lib/system/libsystem_darwin.dylib
+       0x19fba0000 -        0x19fbb1feb  libsystem_notify.dylib (342) <45949DA9-086F-3E8C-9C8F-25B76BE65AEF> /usr/lib/system/libsystem_notify.dylib
+       0x1a1ba5000 -        0x1a1bbfe8f  libsystem_networkextension.dylib (2063.120.19) <F8BFD14F-1B36-3492-8DD3-7300D44A13CC> /usr/lib/system/libsystem_networkextension.dylib
+       0x1a1c3c000 -        0x1a1c53fdb  libsystem_asl.dylib (402) <D6F3BCA9-3E5E-39BF-AB7B-EB88587ADC57> /usr/lib/system/libsystem_asl.dylib
+       0x1a3796000 -        0x1a379e3a7  libsystem_symptoms.dylib (2022.120.2) <E19D8302-3CFC-3767-99BB-C1B2930163E7> /usr/lib/system/libsystem_symptoms.dylib
+       0x1a6fd3000 -        0x1a700338f  libsystem_containermanager.dylib (689.100.6) <12FA61D3-0D2D-3205-B55D-D84717CC2817> /usr/lib/system/libsystem_containermanager.dylib
+       0x1a8238000 -        0x1a823c5df  libsystem_configuration.dylib (1351.120.3) <A9CC0F35-6BB6-3E73-8496-8F14D7AC6F24> /usr/lib/system/libsystem_configuration.dylib
+       0x1a823d000 -        0x1a824347f  libsystem_sandbox.dylib (2401.121.3) <99E69314-53F0-3D91-A3C0-CF0DA7BAE494> /usr/lib/system/libsystem_sandbox.dylib
+       0x1a9244000 -        0x1a9246fe3  libquarantine.dylib (181.120.2) <EC0732A5-DAEE-37B9-B705-F6BF5AC6DA24> /usr/lib/system/libquarantine.dylib
+       0x1a9954000 -        0x1a995a7a3  libsystem_coreservices.dylib (178) <4A9BA38A-4D47-3713-A839-DA773D8A8B54> /usr/lib/system/libsystem_coreservices.dylib
+       0x1a9dd2000 -        0x1a9e0f2b7  libsystem_m.dylib (3291.100.4) <F3A77909-62A9-3E86-9C40-4F0DE713F490> /usr/lib/system/libsystem_m.dylib
+       0x1a9e10000 -        0x1a9e10c9b  libcharset.1.dylib (109.100.2) <87BE8D6D-8604-38B2-95DC-20B69B60D27A> /usr/lib/libcharset.1.dylib
+       0x1a9e11000 -        0x1a9e144e7  libmacho.dylib (1024.3) <4EAD3AF2-CDB9-376A-9A67-6F0037E60D1D> /usr/lib/system/libmacho.dylib
+       0x1a9e2e000 -        0x1a9e3b5ef  libcommonCrypto.dylib (600035) <A40B703D-F173-391D-9AC6-910F78158DA5> /usr/lib/system/libcommonCrypto.dylib
+       0x1a9e3c000 -        0x1a9e45ad7  libunwind.dylib (1900.125) <0E7B8D5B-31BA-3BE8-BF25-E10666EDE277> /usr/lib/system/libunwind.dylib
+       0x1a9e4e000 -        0x1a9e585bf  libcopyfile.dylib (221.121.1) <46F69CD7-7F96-371B-8296-568D482A6411> /usr/lib/system/libcopyfile.dylib
+       0x1a9e59000 -        0x1a9e5c98f  libcompiler_rt.dylib (103.3) <AF97F2CC-03A4-31F0-8C72-587BEFB97632> /usr/lib/system/libcompiler_rt.dylib
+       0x1a9e5d000 -        0x1a9e61a1b  libsystem_collections.dylib (1698.100.8) <03421A5A-565F-39F2-B27E-15EBB24AF62D> /usr/lib/system/libsystem_collections.dylib
+       0x1a9e62000 -        0x1a9e652c7  libsystem_secinit.dylib (153.100.10) <9EAF2187-33C8-3FFD-8B01-6EB7C76891EB> /usr/lib/system/libsystem_secinit.dylib
+       0x1a9e66000 -        0x1a9e68b6f  libremovefile.dylib (81) <DB9BEFA1-2FB7-3082-8733-97D3322278AA> /usr/lib/system/libremovefile.dylib
+       0x1a9e69000 -        0x1a9e69f27  libkeymgr.dylib (31) <0C24AE24-7B28-3C0A-A6F9-42B21C3D4408> /usr/lib/system/libkeymgr.dylib
+       0x1a9e6a000 -        0x1a9e72d57  libsystem_dnssd.dylib (2600.120.12) <82C69999-6EDE-35A7-A08E-79714AA45517> /usr/lib/system/libsystem_dnssd.dylib
+       0x1a9e73000 -        0x1a9e780b3  libcache.dylib (95) <ACCBADB6-3349-3020-9E59-BED2AA2DB0B1> /usr/lib/system/libcache.dylib
+       0x1a9e79000 -        0x1a9e7aca3  libSystem.B.dylib (1351) <F7E5BDDC-FB12-33EF-921F-C93FEF0D41D7> /usr/lib/libSystem.B.dylib
+       0x1a9eb5000 -        0x1a9ebc1eb  libiconv.2.dylib (109.100.2) <76321CF7-68AB-329D-AB5A-CC542D166316> /usr/lib/libiconv.2.dylib
+       0x2838cd000 -        0x2838d4109  libRosetta.dylib (349) <EEB10206-44AA-3304-B4BA-1EE3D29854AF> /usr/lib/libRosetta.dylib
+       0x284cf5000 -        0x284cf8deb  libsystem_darwindirectory.dylib (122) <135AA8DB-7980-3926-836B-62CB50A06836> /usr/lib/system/libsystem_darwindirectory.dylib
+       0x284cf9000 -        0x284d00523  libsystem_eligibility.dylib (181.120.32) <8D8AD9B1-529A-3879-AC11-B670974F0C18> /usr/lib/system/libsystem_eligibility.dylib
+       0x284d01000 -        0x284d066c5  libsystem_sanitizers.dylib (19) <2C6BF94B-EB62-3C05-AC78-55FD05EEA166> /usr/lib/system/libsystem_sanitizers.dylib

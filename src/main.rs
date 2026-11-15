@@ -26,20 +26,30 @@ fn main() -> io::Result<()> {
     let _raw_guard = RawModeGuard::enable()?;
 
     unsafe {
-        libc::signal(libc::SIGWINCH, handle_sigwinch as *const () as libc::sighandler_t);
+        if libc::signal(
+            libc::SIGWINCH,
+            handle_sigwinch as *const () as libc::sighandler_t,
+        ) == libc::SIG_ERR
+        {
+            return Err(io::Error::last_os_error());
+        }
     }
 
     let mut editor = Editor::new()?;
     editor.open(&args[1])?;
     editor.set_status_message("HELP: Ctrl-S = save | Ctrl-Q = quit | Ctrl-F = find");
 
+    editor.refresh_screen()?;
     loop {
         if WINCH_FLAG.swap(false, Ordering::Relaxed) {
-            let _ = editor.update_window_size();
+            editor.update_window_size()?;
+            editor.refresh_screen()?;
         }
-        editor.refresh_screen()?;
-        if !editor.process_keypress()? {
-            break;
+        if let Some(key) = input::read_key()? {
+            if !editor.process_keypress(key)? {
+                break;
+            }
+            editor.refresh_screen()?;
         }
     }
 

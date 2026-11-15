@@ -1,0 +1,129 @@
+{
+  "metric": "macOS wall-clock sampled stacks, including blocked I/O; not CPU-only",
+  "duration_seconds": 8,
+  "interval_ms": 1,
+  "workload": "24x80 PTY; PageDown + 10 Down warmup; repeated 512 Down / 512 Up; batches of 64, every frame acknowledged",
+  "target_sha256": "4a44dd0e41670a9e49ecccb338ee199334f0dd472fc7f86467569cf99c391abe",
+  "profiles": {
+    "C": {
+      "acknowledged_workload_frames": 242688,
+      "completed_cycles": 237,
+      "line_before": 54,
+      "line_after": 54,
+      "file_lines": 1308,
+      "exit_code": 0,
+      "samples": 6203,
+      "binary_sha256": "c0b1cfbb74b2cdbc84181790cc8304e401fb143165a14c566ec04ab89aaa6e74",
+      "top_sampled_leaf_frames": [
+        [
+          "write",
+          2653
+        ],
+        [
+          "tiny_size",
+          665
+        ],
+        [
+          "read",
+          469
+        ],
+        [
+          "_realloc",
+          400
+        ],
+        [
+          "_malloc_zone_realloc",
+          344
+        ],
+        [
+          "szone_size",
+          339
+        ],
+        [
+          "szone_realloc",
+          313
+        ],
+        [
+          "editorRefreshScreen",
+          223
+        ],
+        [
+          "small_size",
+          109
+        ],
+        [
+          "default_zone_realloc",
+          100
+        ],
+        [
+          "tiny_try_realloc_in_place",
+          82
+        ],
+        [
+          "__vfprintf",
+          79
+        ]
+      ]
+    },
+    "Rust": {
+      "acknowledged_workload_frames": 667648,
+      "completed_cycles": 652,
+      "line_before": 54,
+      "line_after": 54,
+      "file_lines": 1308,
+      "exit_code": 0,
+      "samples": 6186,
+      "binary_sha256": "c6ac51846336c638f64ca2a56e061ebf04e2222ca862a8102016b90179d00230",
+      "top_sampled_leaf_frames": [
+        [
+          "write",
+          4097
+        ],
+        [
+          "<kilo_rs::editor::Editor>::refresh_screen",
+          990
+        ],
+        [
+          "read",
+          408
+        ],
+        [
+          "core::fmt::write",
+          106
+        ],
+        [
+          "_platform_memmove",
+          102
+        ],
+        [
+          "<core::fmt::Formatter>::pad_integral",
+          46
+        ],
+        [
+          "<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str",
+          41
+        ],
+        [
+          "<u8 as core::fmt::Display>::fmt",
+          26
+        ],
+        [
+          "<std::io::stdio::StdoutLock as std::io::Write>::write_all",
+          24
+        ],
+        [
+          "<core::fmt::Formatter>::pad_integral::write_prefix",
+          23
+        ],
+        [
+          "kilo_rs::main",
+          20
+        ],
+        [
+          "DYLD-STUB$$memcpy",
+          19
+        ]
+      ]
+    }
+  }
+}

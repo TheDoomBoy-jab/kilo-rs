@@ -1,0 +1,139 @@
+kilo_rs::main 20
+kilo_rs::main;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt 4
+kilo_rs::main;<kilo_rs::editor::Editor>::process_keypress 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen 990
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt 12
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str 18
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write 84
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<core::fmt::Formatter>::pad_integral 7
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str 20
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str;DYLD-STUB$$memcpy 10
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str;_platform_memmove 62
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u64 as core::fmt::Display>::fmt;<core::fmt::Formatter>::pad_integral 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u64 as core::fmt::Display>::fmt;<core::fmt::Formatter>::pad_integral;<core::fmt::Formatter>::pad_integral::write_prefix 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u64 as core::fmt::Display>::fmt;<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u64 as core::fmt::Display>::fmt;<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str;_platform_memmove 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u64 as core::fmt::Display>::fmt;<u64>::_fmt_inner 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u8 as core::fmt::Display>::fmt 26
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u8 as core::fmt::Display>::fmt;<core::fmt::Formatter>::pad_integral 35
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u8 as core::fmt::Display>::fmt;<core::fmt::Formatter>::pad_integral;<core::fmt::Formatter>::pad_integral::write_prefix 6
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u8 as core::fmt::Display>::fmt;<core::fmt::Formatter>::pad_integral::write_prefix 15
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u8 as core::fmt::Display>::fmt;<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u8 as core::fmt::Display>::fmt;<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str;DYLD-STUB$$memcpy 3
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<alloc::vec::Vec<u8> as std::io::Write>::write_fmt;core::fmt::write;<u8 as core::fmt::Display>::fmt;<std::io::default_write_fmt::Adapter<alloc::vec::Vec<u8>> as core::fmt::Write>::write_str;_platform_memmove 13
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::buffered::bufwriter::BufWriter<std::io::stdio::StdoutRaw>>::flush_buf 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::Stdout>::lock 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::Stdout>::lock;_tlv_get_addr 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::Stdout>::lock;pthread_mutex_lock 3
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::flush 7
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::flush;<std::io::buffered::bufwriter::BufWriter<std::io::stdio::StdoutRaw>>::flush_buf 5
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::flush;<std::io::buffered::bufwriter::BufWriter<std::io::stdio::StdoutRaw>>::flush_buf;_platform_memmove 5
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::flush;<std::io::buffered::bufwriter::BufWriter<std::io::stdio::StdoutRaw>>::flush_buf;write 562
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::write_all 24
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::write_all;<std::sys::stdio::unix::Stdout as std::io::Write>::write_all 6
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::write_all;<std::sys::stdio::unix::Stdout as std::io::Write>::write_all;write 3532
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::write_all;DYLD-STUB$$memcpy 4
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::write_all;_platform_memmove 4
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::write_all;core::slice::memchr::memrchr 11
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::io::stdio::StdoutLock as std::io::Write>::write_all;write 3
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::sys::pal::unix::sync::mutex::Mutex>::unlock 5
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::time::Instant>::elapsed 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::time::Instant>::elapsed;<std::sys::pal::unix::time::Timespec>::now;clock_gettime;clock_gettime_nsec_np 3
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::time::Instant>::elapsed;<std::sys::pal::unix::time::Timespec>::now;clock_gettime;clock_gettime_nsec_np;DYLD-STUB$$mach_absolute_time 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::time::Instant>::elapsed;<std::sys::pal::unix::time::Timespec>::now;clock_gettime;clock_gettime_nsec_np;DYLD-STUB$$mach_timebase_info 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::time::Instant>::elapsed;<std::sys::pal::unix::time::Timespec>::now;clock_gettime;clock_gettime_nsec_np;mach_absolute_time 10
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::time::Instant>::elapsed;<std::sys::pal::unix::time::Timespec>::now;clock_gettime;clock_gettime_nsec_np;mach_timebase_info 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::time::Instant>::elapsed;<std::sys::pal::unix::time::Timespec>::now;clock_gettime;mach_timebase_info 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;<std::time::Instant>::elapsed;<std::sys::pal::unix::time::Timespec>::sub_timespec 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;__rustc::__rdl_alloc 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;__rustc::__rust_alloc 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;_free 4
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;_malloc_zone_malloc 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;_platform_memmove 4
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;_szone_free 4
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner 15
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;<alloc::string::String as core::fmt::Write>::write_str 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;<core::fmt::Formatter>::pad 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;<u64 as core::fmt::Display>::fmt 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write 7
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<&str as core::fmt::Display>::fmt 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global> 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str 4
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global> 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;DYLD-STUB$$malloc 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;__rustc::__rust_no_alloc_shim_is_unstable_v2 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_malloc_zone_malloc 3
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_realloc 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_realloc;_malloc_zone_realloc 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_realloc;_malloc_zone_realloc;szone_realloc 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_realloc;_malloc_zone_realloc;szone_realloc;szone_malloc_should_clear;tiny_malloc_should_clear 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_realloc;_malloc_zone_realloc;szone_realloc;szone_size;tiny_size 3
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_realloc;_malloc_zone_realloc;szone_realloc;tiny_try_realloc_in_place 5
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_realloc;_malloc_zone_realloc;szone_realloc;tiny_try_realloc_in_place;tiny_free_list_add_ptr 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_realloc;_malloc_zone_realloc;szone_realloc;tiny_try_realloc_in_place;tiny_free_list_remove_ptr 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_realloc;szone_size;tiny_size 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_malloc_should_clear 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_malloc_should_clear;tiny_malloc_should_clear 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_malloc_should_clear;tiny_malloc_should_clear;tiny_malloc_from_free_list 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_malloc_should_clear;tiny_malloc_should_clear;tiny_malloc_from_free_list;tiny_free_list_add_ptr 3
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_size 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;__rustc::__rust_alloc 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;szone_malloc_should_clear 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;DYLD-STUB$$memcpy 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<alloc::string::String as core::fmt::Write>::write_str;_platform_memmove 4
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<core::fmt::Formatter>::pad 16
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<core::fmt::Formatter>::pad_integral 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<str as core::fmt::Display>::fmt 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global> 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;__rustc::__rdl_alloc 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;_malloc_zone_malloc 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_malloc_should_clear;tiny_malloc_should_clear 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_malloc_should_clear;tiny_malloc_should_clear;_tiny_check_and_zero_inline_meta_from_freelist 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_malloc_should_clear;tiny_malloc_should_clear;rack_get_thread_index 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_malloc_should_clear;tiny_malloc_should_clear;tiny_malloc_from_free_list 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;<alloc::raw_vec::RawVecInner<_>>::reserve::do_reserve_and_handle::<alloc::alloc::Global>;<alloc::raw_vec::RawVecInner>::finish_grow;szone_malloc_should_clear;tiny_malloc_should_clear;tiny_malloc_from_free_list;_tiny_check_and_zero_inline_meta_from_freelist 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;DYLD-STUB$$memcpy 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<alloc::string::String as core::fmt::Write>::write_str;_platform_memmove 8
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<core::fmt::Formatter>::pad_integral 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<core::fmt::Formatter>::pad_integral;<core::fmt::Formatter>::pad_integral::write_prefix 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64 as core::fmt::Display>::fmt;<u64>::_fmt_inner 4
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;alloc::fmt::format::format_inner;core::fmt::write;<u64>::_fmt_inner 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;core::fmt::write 15
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;core::str::converts::from_utf8 4
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;free_tiny 9
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;free_tiny;DYLD-STUB$$_platform_memset 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;free_tiny;_platform_memset 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;free_tiny;tiny_free_list_add_ptr 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;free_tiny;tiny_free_no_lock 9
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;free_tiny;tiny_free_no_lock;get_tiny_previous_free_msize 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;free_tiny;tiny_free_no_lock;tiny_free_list_add_ptr 6
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;free_tiny;tiny_free_no_lock;tiny_free_list_remove_ptr 2
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;pthread_mutex_unlock 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;std::io::stdio::stdout 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;szone_malloc_should_clear 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;szone_malloc_should_clear;tiny_malloc_should_clear 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;szone_malloc_should_clear;tiny_malloc_should_clear;_tiny_check_and_zero_inline_meta_from_freelist 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;szone_malloc_should_clear;tiny_malloc_should_clear;rack_get_thread_index 3
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;szone_malloc_should_clear;tiny_malloc_should_clear;tiny_free_list_add_ptr 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;szone_malloc_should_clear;tiny_malloc_should_clear;tiny_malloc_from_free_list 3
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;szone_malloc_should_clear;tiny_malloc_should_clear;tiny_malloc_from_free_list;tiny_free_list_add_ptr 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;szone_malloc_type_malloc 1
+kilo_rs::main;<kilo_rs::editor::Editor>::refresh_screen;tiny_free_no_lock 1
+kilo_rs::main;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut 1
+kilo_rs::main;<std::io::stdio::StdoutLock as std::io::Write>::flush 1
+kilo_rs::main;kilo_rs::input::read_key 15
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut 3
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut;<std::io::buffered::bufreader::BufReader<std::io::stdio::StdinRaw> as std::io::Read>::read 3
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut;<std::io::stdio::Stdin as std::io::Read>::read 5
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut;<std::io::stdio::Stdin as std::io::Read>::read;<std::io::buffered::bufreader::BufReader<std::io::stdio::StdinRaw> as std::io::Read>::read 1
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut;<std::io::stdio::Stdin as std::io::Read>::read;<std::io::buffered::bufreader::BufReader<std::io::stdio::StdinRaw> as std::io::Read>::read;read 408
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut;<std::io::stdio::Stdin as std::io::Read>::read;DYLD-STUB$$pthread_mutex_lock 1
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut;<std::io::stdio::Stdin as std::io::Read>::read;DYLD-STUB$$pthread_mutex_unlock 1
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut;<std::io::stdio::Stdin as std::io::Read>::read;pthread_mutex_unlock 2
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut;pthread_mutex_lock 1
+kilo_rs::main;kilo_rs::input::read_key;<kilo_rs::input::read_byte as core::ops::function::FnMut<()>>::call_mut;std::io::stdio::stdin 6
+main;std::rt::lang_start_internal;std::rt::lang_start::<core::result::Result<(), core::io::error::Error>>::{closure#0};std::sys::backtrace::__rust_begin_short_backtrace::<fn() -> core::result::Result<(), core::io::error::Error>, core::result::Result<(), core::io::error::Error>>;<kilo_rs::editor::Editor>::process_keypress 1

@@ -8,6 +8,82 @@ use crate::terminal;
 
 const KILO_VERSION: &str = "0.1.0-rs";
 const KILO_QUIT_TIMES: u8 = 3;
+type PromptCallback<'a> = dyn FnMut(&mut Editor, &[u8], Key) + 'a;
+
+// Metadata is rendered in one terminal cell per byte, just like file contents.
+// Never allow filenames or I/O errors to inject terminal control sequences.
+fn display_metadata(bytes: &[u8], width: usize) -> Vec<u8> {
+    bytes
+        .iter()
+        .take(width)
+        .map(|&b| if (32..127).contains(&b) { b } else { b'?' })
+        .collect()
+}
+
+// Write beside the destination and rename only after a complete, synced write.
+// Existing symlinks continue to refer to their original target.
+fn write_file(filename: &str, contents: &[u8]) -> io::Result<()> {
+    use std::fs::OpenOptions;
+    use std::path::Path;
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static NEXT: AtomicU64 = AtomicU64::new(0);
+
+    let path = Path::new(filename);
+    let target = match fs::symlink_metadata(path) {
+        Ok(metadata) if metadata.file_type().is_symlink() => fs::canonicalize(path)?,
+        Ok(_) => path.to_path_buf(),
+        Err(e) if e.kind() == io::ErrorKind::NotFound => path.to_path_buf(),
+        Err(e) => return Err(e),
+    };
+    let metadata = match fs::metadata(&target) {
+        Ok(metadata) => {
+            if !metadata.is_file() {
+                return Err(io::Error::new(
+                    io::ErrorKind::InvalidInput,
+                    "destination is not a regular file",
+                ));
+            }
+            if metadata.permissions().readonly() {
+                return Err(io::Error::new(
+                    io::ErrorKind::PermissionDenied,
+                    "destination is read-only",
+                ));
+            }
+            Some(metadata)
+        }
+        Err(e) if e.kind() == io::ErrorKind::NotFound => None,
+        Err(e) => return Err(e),
+    };
+    let parent = target
+        .parent()
+        .filter(|p| !p.as_os_str().is_empty())
+        .unwrap_or(Path::new("."));
+    let (temp, mut file) = loop {
+        let temp = parent.join(format!(
+            ".kilo-rs-{}-{}.tmp",
+            std::process::id(),
+            NEXT.fetch_add(1, Ordering::Relaxed)
+        ));
+        match OpenOptions::new().write(true).create_new(true).open(&temp) {
+            Ok(file) => break (temp, file),
+            Err(e) if e.kind() == io::ErrorKind::AlreadyExists => continue,
+            Err(e) => return Err(e),
+        }
+    };
+    let result = (|| {
+        if let Some(metadata) = metadata {
+            file.set_permissions(metadata.permissions())?;
+        }
+        file.write_all(contents)?;
+        file.sync_all()?;
+        drop(file);
+        fs::rename(&temp, &target)
+    })();
+    if result.is_err() {
+        let _ = fs::remove_file(&temp);
+    }
+    result
+}
 
 pub struct Editor {
     cx: usize,
@@ -16,6 +92,7 @@ pub struct Editor {
     rowoff: usize,
     coloff: usize,
     screenrows: usize,
+    screenheight: usize,
     screencols: usize,
     rows: Vec<Row>,
     dirty: bool,
@@ -37,8 +114,9 @@ impl Editor {
             rx: 0,
             rowoff: 0,
             coloff: 0,
-            screenrows: rows.saturating_sub(2),
+            screenrows: rows.saturating_sub(2).max(1),
             screencols: cols,
+            screenheight: rows,
             rows: Vec::new(),
             dirty: false,
             filename: None,
@@ -52,14 +130,11 @@ impl Editor {
 
     pub fn update_window_size(&mut self) -> io::Result<()> {
         let (rows, cols) = terminal::get_window_size()?;
-        self.screenrows = rows.saturating_sub(2);
+        self.screenrows = rows.saturating_sub(2).max(1);
         self.screencols = cols;
-        if self.cy >= self.screenrows + self.rowoff {
-            self.cy = self.screenrows.saturating_add(self.rowoff).saturating_sub(1);
-        }
-        if self.cx >= self.screencols + self.coloff {
-            self.cx = self.screencols.saturating_add(self.coloff).saturating_sub(1);
-        }
+        self.screenheight = rows;
+        // Resizing changes the viewport, never the document position.
+        self.scroll();
         Ok(())
     }
 
@@ -69,21 +144,31 @@ impl Editor {
     }
 
     pub fn open(&mut self, filename: &str) -> io::Result<()> {
+        let contents = match fs::read(filename) {
+            Ok(contents) => contents,
+            Err(e) if e.kind() == io::ErrorKind::NotFound => Vec::new(),
+            Err(e) => return Err(e),
+        };
         self.filename = Some(filename.to_string());
         self.syntax = select_syntax(filename);
         self.rows.clear();
-
-        if let Ok(contents) = fs::read(filename) {
-            for line in contents.split(|&b| b == b'\n') {
-                let trimmed = line.strip_suffix(b"\r").unwrap_or(line);
-                self.rows.push(Row::new(trimmed.to_vec()));
-            }
-            // If file ends with trailing newline, split() adds a trailing empty slice; keep behavior clean
-            if contents.ends_with(b"\n") && self.rows.len() > 1 {
-                self.rows.pop();
-            }
-            self.recompute_all_rows();
+        for line in contents.split_inclusive(|&b| b == b'\n') {
+            let (chars, ending) = if let Some(body) = line.strip_suffix(b"\r\n") {
+                (body, b"\r\n".as_slice())
+            } else if let Some(body) = line.strip_suffix(b"\n") {
+                (body, b"\n".as_slice())
+            } else {
+                (line, b"".as_slice())
+            };
+            let mut row = Row::new(chars.to_vec());
+            row.ending = ending.to_vec();
+            self.rows.push(row);
         }
+        self.cx = 0;
+        self.cy = 0;
+        self.rowoff = 0;
+        self.coloff = 0;
+        self.recompute_all_rows();
         self.dirty = false;
         Ok(())
     }
@@ -97,42 +182,52 @@ impl Editor {
     }
 
     fn update_row_from(&mut self, start_idx: usize) {
-        let mut idx = start_idx;
-        while idx < self.rows.len() {
+        // Structural edits can change the predecessor of an existing row even
+        // when the newly inserted row's outgoing comment state is unchanged.
+        for idx in start_idx..self.rows.len() {
             let prev_open = if idx > 0 {
                 self.rows[idx - 1].hl_open_comment
             } else {
                 false
             };
             let changed = self.rows[idx].update(self.syntax, prev_open);
-            if !changed {
+            if idx > start_idx && !changed {
                 break;
             }
-            idx += 1;
         }
     }
 
-    fn save(&mut self) {
+    fn save(&mut self) -> io::Result<()> {
         if self.filename.is_none() {
-            if let Some(name) = self.prompt("Save as: {} (ESC to cancel)", None) {
+            if let Some(name) = self.prompt("Save as: {} (ESC to cancel)", None)? {
+                let Ok(name) = String::from_utf8(name) else {
+                    self.set_status_message("Can't save: filename must be valid UTF-8");
+                    return Ok(());
+                };
                 self.syntax = select_syntax(&name);
                 self.filename = Some(name);
                 self.recompute_all_rows();
             } else {
                 self.set_status_message("Save aborted");
-                return;
+                return Ok(());
             }
         }
 
-        let Some(ref path) = self.filename else { return };
-        let total_bytes: usize = self.rows.iter().map(|r| r.chars.len() + 1).sum();
+        let Some(ref path) = self.filename else {
+            return Ok(());
+        };
+        let total_bytes: usize = self
+            .rows
+            .iter()
+            .map(|r| r.chars.len() + r.ending.len())
+            .sum();
         let mut out = Vec::with_capacity(total_bytes);
         for row in &self.rows {
             out.extend_from_slice(&row.chars);
-            out.push(b'\n');
+            out.extend_from_slice(&row.ending);
         }
 
-        match fs::write(path, &out) {
+        match write_file(path, &out) {
             Ok(()) => {
                 self.dirty = false;
                 self.set_status_message(format!("{} bytes written on disk", out.len()));
@@ -141,11 +236,15 @@ impl Editor {
                 self.set_status_message(format!("Can't save! I/O error: {}", e));
             }
         }
+        Ok(())
     }
 
     fn insert_char(&mut self, c: u8) {
         if self.cy == self.rows.len() {
-            self.rows.push(Row::new(Vec::new()));
+            self.ensure_previous_newline();
+            let mut row = Row::new(Vec::new());
+            row.ending.clear();
+            self.rows.push(row);
         }
         let cy = self.cy;
         self.rows[cy].insert_char(self.cx, c);
@@ -154,12 +253,24 @@ impl Editor {
         self.dirty = true;
     }
 
+    fn ensure_previous_newline(&mut self) {
+        if let Some(previous) = self.rows.last_mut().filter(|r| r.ending.is_empty()) {
+            previous.ending = b"\n".to_vec();
+        }
+    }
+
     fn insert_newline(&mut self) {
+        if self.cy == self.rows.len() {
+            self.ensure_previous_newline();
+        }
         if self.cx == 0 {
             self.rows.insert(self.cy, Row::new(Vec::new()));
         } else {
             let tail = self.rows[self.cy].chars.split_off(self.cx);
-            self.rows.insert(self.cy + 1, Row::new(tail));
+            let ending = std::mem::replace(&mut self.rows[self.cy].ending, b"\n".to_vec());
+            let mut new_row = Row::new(tail);
+            new_row.ending = ending;
+            self.rows.insert(self.cy + 1, new_row);
         }
         self.update_row_from(self.cy);
         self.cy += 1;
@@ -168,7 +279,16 @@ impl Editor {
     }
 
     fn del_char(&mut self) {
-        if self.cy == self.rows.len() || (self.cx == 0 && self.cy == 0) {
+        if self.cy == self.rows.len() {
+            if self.cy > 0 {
+                self.cy -= 1;
+                self.cx = self.rows[self.cy].chars.len();
+                self.dirty |= !self.rows[self.cy].ending.is_empty();
+                self.rows[self.cy].ending.clear();
+            }
+            return;
+        }
+        if self.cx == 0 && self.cy == 0 {
             return;
         }
         if self.cx > 0 {
@@ -181,6 +301,7 @@ impl Editor {
             self.cy -= 1;
             self.cx = self.rows[self.cy].chars.len();
             self.rows[self.cy].chars.extend_from_slice(&removed.chars);
+            self.rows[self.cy].ending = removed.ending;
             self.update_row_from(self.cy);
         }
         self.dirty = true;
@@ -208,6 +329,13 @@ impl Editor {
     }
 
     pub fn refresh_screen(&mut self) -> io::Result<()> {
+        self.render_frame();
+        let mut stdout = io::stdout().lock();
+        stdout.write_all(&self.frame_buf)?;
+        stdout.flush()
+    }
+
+    fn render_frame(&mut self) {
         self.scroll();
 
         self.frame_buf.clear();
@@ -228,13 +356,18 @@ impl Editor {
                     for _ in 0..padding {
                         self.frame_buf.push(b' ');
                     }
-                    self.frame_buf.extend_from_slice(&welcome.as_bytes()[..wlen]);
+                    self.frame_buf
+                        .extend_from_slice(&welcome.as_bytes()[..wlen]);
                 } else {
                     self.frame_buf.push(b'~');
                 }
             } else {
                 let row = &self.rows[filerow];
-                let len = row.render.len().saturating_sub(self.coloff).min(self.screencols);
+                let len = row
+                    .render
+                    .len()
+                    .saturating_sub(self.coloff)
+                    .min(self.screencols);
                 if len > 0 {
                     let mut current_color: Option<u8> = None;
                     for i in 0..len {
@@ -242,7 +375,7 @@ impl Editor {
                         let b = row.render[idx];
                         let hl = row.hl[idx];
 
-                        if hl == Highlight::NonPrint {
+                        if !(32..127).contains(&b) {
                             let sym = if b <= 26 { b'@' + b } else { b'?' };
                             self.frame_buf.extend_from_slice(b"\x1b[7m");
                             self.frame_buf.push(sym);
@@ -269,44 +402,50 @@ impl Editor {
                 }
             }
 
-            self.frame_buf.extend_from_slice(b"\x1b[K\r\n");
-        }
-
-        // Status bar (inverted colors)
-        self.frame_buf.extend_from_slice(b"\x1b[7m");
-        let name = self.filename.as_deref().unwrap_or("[No Name]");
-        let dirty_str = if self.dirty { "(modified)" } else { "" };
-        let left = format!("{:.20} - {} lines {}", name, self.rows.len(), dirty_str);
-        let right = format!("{}/{}", self.cy + 1, self.rows.len());
-
-        let mut len = left.len().min(self.screencols);
-        self.frame_buf.extend_from_slice(&left.as_bytes()[..len]);
-        while len < self.screencols {
-            if self.screencols - len == right.len() {
-                self.frame_buf.extend_from_slice(right.as_bytes());
-                break;
-            } else {
-                self.frame_buf.push(b' ');
-                len += 1;
+            self.frame_buf.extend_from_slice(b"\x1b[K");
+            if y + 1 < self.screenheight {
+                self.frame_buf.extend_from_slice(b"\r\n");
             }
         }
-        self.frame_buf.extend_from_slice(b"\x1b[0m\r\n");
 
-        // Message bar
-        self.frame_buf.extend_from_slice(b"\x1b[K");
-        if !self.statusmsg.is_empty() && self.statusmsg_time.elapsed() < Duration::from_secs(5) {
-            let mlen = self.statusmsg.len().min(self.screencols);
-            self.frame_buf.extend_from_slice(&self.statusmsg.as_bytes()[..mlen]);
+        if self.screenheight > 1 {
+            // Status bar (inverted colors)
+            self.frame_buf.extend_from_slice(b"\x1b[7m");
+            let name = self.filename.as_deref().unwrap_or("[No Name]");
+            let name =
+                String::from_utf8(display_metadata(name.as_bytes(), 20)).expect("ASCII metadata");
+            let dirty_str = if self.dirty { "(modified)" } else { "" };
+            let left = format!("{:.20} - {} lines {}", name, self.rows.len(), dirty_str);
+            let right = format!("{}/{}", self.cy + 1, self.rows.len());
+
+            let mut len = left.len().min(self.screencols);
+            self.frame_buf.extend_from_slice(&left.as_bytes()[..len]);
+            while len < self.screencols {
+                if self.screencols - len == right.len() {
+                    self.frame_buf.extend_from_slice(right.as_bytes());
+                    break;
+                } else {
+                    self.frame_buf.push(b' ');
+                    len += 1;
+                }
+            }
+            self.frame_buf.extend_from_slice(b"\x1b[0m");
+        }
+        if self.screenheight > 2 {
+            self.frame_buf.extend_from_slice(b"\r\n");
+            self.frame_buf.extend_from_slice(b"\x1b[K");
+            if !self.statusmsg.is_empty() && self.statusmsg_time.elapsed() < Duration::from_secs(5)
+            {
+                let mlen = self.statusmsg.len().min(self.screencols);
+                self.frame_buf
+                    .extend_from_slice(&display_metadata(self.statusmsg.as_bytes(), mlen));
+            }
         }
 
         // Reposition cursor and show it
         let cursor_y = (self.cy - self.rowoff) + 1;
         let cursor_x = (self.rx - self.coloff) + 1;
         let _ = write!(self.frame_buf, "\x1b[{};{}H\x1b[?25h", cursor_y, cursor_x);
-
-        let mut stdout = io::stdout().lock();
-        stdout.write_all(&self.frame_buf)?;
-        stdout.flush()
     }
 
     fn move_cursor(&mut self, key: Key) {
@@ -335,11 +474,7 @@ impl Editor {
                     self.cy -= 1;
                 }
             }
-            Key::ArrowDown => {
-                if self.cy < self.rows.len() {
-                    self.cy += 1;
-                }
-            }
+            Key::ArrowDown if self.cy < self.rows.len() => self.cy += 1,
             _ => {}
         }
 
@@ -352,14 +487,19 @@ impl Editor {
     fn prompt(
         &mut self,
         template: &str,
-        mut callback: Option<&mut dyn FnMut(&mut Self, &str, Key)>,
-    ) -> Option<String> {
-        let mut buf = String::new();
+        mut callback: Option<&mut PromptCallback<'_>>,
+    ) -> io::Result<Option<Vec<u8>>> {
+        let mut buf = Vec::new();
         loop {
-            self.set_status_message(template.replace("{}", &buf));
-            let _ = self.refresh_screen();
+            if crate::WINCH_FLAG.swap(false, std::sync::atomic::Ordering::Relaxed) {
+                self.update_window_size()?;
+            }
+            self.set_status_message(template.replace("{}", &String::from_utf8_lossy(&buf)));
+            self.refresh_screen()?;
 
-            let Ok(key) = input::read_key() else { return None };
+            let Some(key) = input::read_key()? else {
+                continue;
+            };
             match key {
                 Key::Del | Key::Backspace | Key::Ctrl(b'h') => {
                     buf.pop();
@@ -369,7 +509,7 @@ impl Editor {
                     if let Some(ref mut cb) = callback {
                         cb(self, &buf, key);
                     }
-                    return None;
+                    return Ok(None);
                 }
                 Key::Enter => {
                     if !buf.is_empty() {
@@ -377,11 +517,11 @@ impl Editor {
                         if let Some(ref mut cb) = callback {
                             cb(self, &buf, key);
                         }
-                        return Some(buf);
+                        return Ok(Some(buf));
                     }
                 }
                 Key::Char(c) if !c.is_ascii_control() => {
-                    buf.push(c as char);
+                    buf.push(c);
                 }
                 _ => {}
             }
@@ -392,7 +532,7 @@ impl Editor {
         }
     }
 
-    fn find(&mut self) {
+    fn find(&mut self) -> io::Result<()> {
         let saved_cx = self.cx;
         let saved_cy = self.cy;
         let saved_coloff = self.coloff;
@@ -402,11 +542,9 @@ impl Editor {
         let mut direction: isize = 1;
         let mut saved_hl: Option<(usize, Vec<Highlight>)> = None;
 
-        let mut on_find = |ed: &mut Self, query: &str, key: Key| {
+        let mut on_find = |ed: &mut Self, query: &[u8], key: Key| {
             if let Some((row_idx, orig_hl)) = saved_hl.take() {
-                if row_idx < ed.rows.len() {
-                    ed.rows[row_idx].hl = orig_hl;
-                }
+                ed.rows[row_idx].hl = orig_hl;
             }
 
             if key == Key::Enter || key == Key::Esc {
@@ -441,11 +579,14 @@ impl Editor {
                 }
 
                 let idx = current as usize;
-                let row_render = String::from_utf8_lossy(&ed.rows[idx].render);
-                if let Some(match_pos) = row_render.find(query) {
+                if let Some(match_pos) = ed.rows[idx]
+                    .render
+                    .windows(query.len())
+                    .position(|w| w == query)
+                {
                     last_match = Some(idx);
                     ed.cy = idx;
-                    ed.cx = match_pos;
+                    ed.cx = ed.rows[idx].rx_to_cx(match_pos);
                     ed.rowoff = ed.rows.len();
 
                     saved_hl = Some((idx, ed.rows[idx].hl.clone()));
@@ -458,18 +599,22 @@ impl Editor {
             }
         };
 
-        if self.prompt("Search: {} (Use ESC/Arrows/Enter)", Some(&mut on_find)).is_none() {
+        let result = self.prompt("Search: {} (Use ESC/Arrows/Enter)", Some(&mut on_find));
+        // Restore temporary highlighting even if terminal I/O failed.
+        if let Some((idx, hl)) = saved_hl.take() {
+            self.rows[idx].hl = hl;
+        }
+        if !matches!(result, Ok(Some(_))) {
             self.cx = saved_cx;
             self.cy = saved_cy;
             self.coloff = saved_coloff;
             self.rowoff = saved_rowoff;
         }
+        result.map(|_| ())
     }
 
     /// Returns `Ok(true)` if the editor should keep running, `Ok(false)` to exit.
-    pub fn process_keypress(&mut self) -> io::Result<bool> {
-        let key = input::read_key()?;
-
+    pub fn process_keypress(&mut self, key: Key) -> io::Result<bool> {
         match key {
             Key::Enter => self.insert_newline(),
             Key::Ctrl(b'q') => {
@@ -487,8 +632,8 @@ impl Editor {
                 stdout.flush()?;
                 return Ok(false);
             }
-            Key::Ctrl(b's') => self.save(),
-            Key::Ctrl(b'f') => self.find(),
+            Key::Ctrl(b's') => self.save()?,
+            Key::Ctrl(b'f') => self.find()?,
             Key::Home => self.cx = 0,
             Key::End => {
                 if self.cy < self.rows.len() {
@@ -497,16 +642,27 @@ impl Editor {
             }
             Key::Backspace | Key::Ctrl(b'h') => self.del_char(),
             Key::Del => {
-                self.move_cursor(Key::ArrowRight);
-                self.del_char();
+                if self.cy < self.rows.len()
+                    && (self.cx < self.rows[self.cy].chars.len() || self.cy + 1 < self.rows.len())
+                {
+                    self.move_cursor(Key::ArrowRight);
+                    self.del_char();
+                } else if self.cy < self.rows.len() && !self.rows[self.cy].ending.is_empty() {
+                    self.rows[self.cy].ending.clear();
+                    self.dirty = true;
+                }
             }
             Key::PageUp | Key::PageDown => {
                 if key == Key::PageUp {
-                    self.cy = self.rowoff;
+                    self.cy = self.rowoff.min(self.rows.len());
                 } else {
                     self.cy = (self.rowoff + self.screenrows - 1).min(self.rows.len());
                 }
-                let dir = if key == Key::PageUp { Key::ArrowUp } else { Key::ArrowDown };
+                let dir = if key == Key::PageUp {
+                    Key::ArrowUp
+                } else {
+                    Key::ArrowDown
+                };
                 for _ in 0..self.screenrows {
                     self.move_cursor(dir);
                 }
@@ -522,5 +678,218 @@ impl Editor {
 
         self.quit_times = KILO_QUIT_TIMES;
         Ok(true)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::sync::atomic::{AtomicUsize, Ordering};
+
+    fn editor() -> Editor {
+        Editor {
+            cx: 0,
+            cy: 0,
+            rx: 0,
+            rowoff: 0,
+            coloff: 0,
+            screenrows: 22,
+            screencols: 80,
+            screenheight: 24,
+            rows: Vec::new(),
+            dirty: false,
+            filename: None,
+            statusmsg: String::new(),
+            statusmsg_time: Instant::now(),
+            syntax: None,
+            quit_times: KILO_QUIT_TIMES,
+            frame_buf: Vec::new(),
+        }
+    }
+
+    struct TempFile(std::path::PathBuf);
+    impl TempFile {
+        fn new() -> Self {
+            static NEXT: AtomicUsize = AtomicUsize::new(0);
+            Self(std::env::temp_dir().join(format!(
+                "kilo-test-{}-{}",
+                std::process::id(),
+                NEXT.fetch_add(1, Ordering::Relaxed)
+            )))
+        }
+        fn path(&self) -> &str {
+            self.0.to_str().unwrap()
+        }
+    }
+    impl Drop for TempFile {
+        fn drop(&mut self) {
+            let _ = fs::remove_file(&self.0);
+        }
+    }
+
+    #[test]
+    fn file_round_trip_preserves_all_bytes() {
+        for contents in [
+            b"".as_slice(),
+            b"abc",
+            b"abc\n",
+            b"a\r\nb\n\r",
+            b"\n\n",
+            b"\xff\0\x1b\n",
+        ] {
+            let temp = TempFile::new();
+            fs::write(&temp.0, contents).unwrap();
+            let mut ed = editor();
+            ed.open(temp.path()).unwrap();
+            ed.save().unwrap();
+            assert_eq!(fs::read(&temp.0).unwrap(), contents);
+        }
+    }
+
+    #[test]
+    fn open_errors_preserve_existing_document() {
+        let mut ed = editor();
+        ed.insert_char(b'x');
+        assert!(ed.open(std::env::temp_dir().to_str().unwrap()).is_err());
+        assert_eq!(ed.rows[0].chars, b"x");
+        assert!(ed.dirty);
+        let temp = TempFile::new();
+        ed.open(temp.path()).unwrap();
+        assert!(ed.rows.is_empty());
+        assert!(!ed.dirty);
+    }
+
+    #[test]
+    fn splitting_and_joining_updates_both_rows() {
+        let mut ed = editor();
+        ed.syntax = Some(&crate::row::C_SYNTAX);
+        ed.rows.push(Row::new(b"/* comment */ int x;".to_vec()));
+        ed.recompute_all_rows();
+        ed.cx = 3;
+        ed.insert_newline();
+        assert_eq!(ed.rows[1].render, b"comment */ int x;");
+        assert_eq!(ed.rows[1].hl[0], Highlight::MlComment);
+        ed.del_char();
+        assert_eq!(ed.rows.len(), 1);
+        assert_eq!(ed.rows[0].render, b"/* comment */ int x;");
+    }
+
+    #[test]
+    fn deleting_at_eof_never_deletes_the_last_character() {
+        let mut ed = editor();
+        ed.insert_char(b'x');
+        ed.process_keypress(Key::Del).unwrap();
+        assert_eq!(ed.rows[0].chars, b"x");
+        ed.rows[0].ending = b"\n".to_vec();
+        ed.process_keypress(Key::Del).unwrap();
+        assert_eq!(ed.rows[0].chars, b"x");
+        assert!(ed.rows[0].ending.is_empty());
+    }
+
+    #[test]
+    fn backspace_at_virtual_eof_removes_the_newline() {
+        let mut ed = editor();
+        ed.rows.push(Row::new(b"x".to_vec()));
+        ed.cy = 1;
+        ed.del_char();
+        assert_eq!((ed.cx, ed.cy), (1, 0));
+        assert_eq!(ed.rows[0].chars, b"x");
+        assert!(ed.rows[0].ending.is_empty());
+    }
+
+    #[test]
+    fn tiny_terminal_and_control_bytes_render_safely() {
+        let mut ed = editor();
+        ed.syntax = Some(&crate::row::C_SYNTAX);
+        ed.rows.push(Row::new(b"//\x1b[2J\xff".to_vec()));
+        ed.filename = Some("\x1b[2J".into());
+        ed.set_status_message("\x1b[2J");
+        ed.recompute_all_rows();
+        for height in 1..=3 {
+            ed.screenheight = height;
+            ed.screenrows = height.saturating_sub(2).max(1);
+            ed.screencols = 1;
+            ed.process_keypress(Key::PageDown).unwrap();
+            ed.render_frame();
+            assert!(!ed.frame_buf.windows(4).any(|w| w == b"\x1b[2J"));
+            assert!(ed.cy <= ed.rows.len());
+        }
+        ed.screencols = 80;
+        ed.cy = 0;
+        ed.render_frame();
+        assert!(!ed.frame_buf.windows(4).any(|w| w == b"\x1b[2J"));
+        assert!(!ed.frame_buf.contains(&255));
+    }
+
+    #[test]
+    fn editing_sequences_keep_cursor_and_highlights_valid() {
+        let keys = [
+            Key::Char(b'x'),
+            Key::Tab,
+            Key::Enter,
+            Key::Backspace,
+            Key::Del,
+            Key::ArrowLeft,
+            Key::ArrowRight,
+            Key::ArrowUp,
+            Key::ArrowDown,
+            Key::Home,
+            Key::End,
+            Key::PageUp,
+            Key::PageDown,
+        ];
+        let mut ed = editor();
+        let mut seed = 7_u64;
+        for _ in 0..10_000 {
+            seed = seed.wrapping_mul(6364136223846793005).wrapping_add(1);
+            ed.process_keypress(keys[(seed >> 32) as usize % keys.len()])
+                .unwrap();
+            assert!(ed.cy <= ed.rows.len());
+            assert!(ed.cx <= ed.rows.get(ed.cy).map_or(0, |r| r.chars.len()));
+            for row in &ed.rows {
+                assert_eq!(row.render.len(), row.hl.len());
+                let mut expected = Row::new(row.chars.clone());
+                expected.update(None, false);
+                assert_eq!(row.render, expected.render);
+            }
+            ed.render_frame();
+        }
+    }
+    #[test]
+    fn failed_save_keeps_dirty_buffer_and_original_file() {
+        use std::os::unix::fs::PermissionsExt;
+        let temp = TempFile::new();
+        fs::write(&temp.0, b"original").unwrap();
+        fs::set_permissions(&temp.0, fs::Permissions::from_mode(0o444)).unwrap();
+        let mut ed = editor();
+        ed.open(temp.path()).unwrap();
+        ed.insert_char(b'x');
+        ed.save().unwrap();
+        assert!(ed.dirty);
+        assert!(ed.statusmsg.contains("Can't save"));
+        assert_eq!(fs::read(&temp.0).unwrap(), b"original");
+        fs::set_permissions(&temp.0, fs::Permissions::from_mode(0o600)).unwrap();
+    }
+
+    #[test]
+    fn saving_through_symlink_preserves_link_and_permissions() {
+        use std::os::unix::fs::{PermissionsExt, symlink};
+        let temp = TempFile::new();
+        let link = TempFile::new();
+        fs::write(&temp.0, b"original").unwrap();
+        fs::set_permissions(&temp.0, fs::Permissions::from_mode(0o640)).unwrap();
+        symlink(&temp.0, &link.0).unwrap();
+        write_file(link.path(), b"changed").unwrap();
+        assert!(
+            fs::symlink_metadata(&link.0)
+                .unwrap()
+                .file_type()
+                .is_symlink()
+        );
+        assert_eq!(fs::read(&temp.0).unwrap(), b"changed");
+        assert_eq!(
+            fs::metadata(&temp.0).unwrap().permissions().mode() & 0o777,
+            0o640
+        );
     }
 }
